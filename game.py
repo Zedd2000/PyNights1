@@ -13,10 +13,12 @@ power = 1000
 bonPos = 0
 bonThreat = 0
 bonStag = 0
+bonOp = 0
 
 chiPos = 0
 chiThreat = 0
 chiStag = 0
+chiOp = 0
 
 foxPos = 0
 foxTime = 100
@@ -29,18 +31,20 @@ cam = None
 lDoor = False
 rDoor = False
 
-def threat(hour, stag):
+def threat(hour, bstag, cstag):
     if(hour == 0):
-        roll = (random.randint(1,50) + stag)
+        rollb = (random.randint(1,50) + bstag)
+        rollc = (random.randint(1,50) + cstag)
     else:
-        roll = ((random.randint(1,50) + stag) * hour)
-    return roll
+        rollb = ((random.randint(1,50) + bstag) * hour)
+        rollc = ((random.randint(1,50) + cstag) * hour)
+    return rollb, rollc
 
 def SPrint(string):
     for char in string:
         sys.stdout.write(char)
         sys.stdout.flush()
-        time.sleep(0.001)
+        time.sleep(0.000001)
 
 core.clear()
 SPrint("""Hello? Hello, hello? Uh, I wanted to record a message for you to help you get settled in on your first night. Um, I actually worked in that office before you. I'm finishing up my last week now, as a matter of fact. So, I know it can be a bit overwhelming, but I'm here to tell you there's nothing to worry about. Uh, you'll do fine. So, let's just focus on getting you through your first week, okay?
@@ -57,6 +61,7 @@ Y-Yeah, they don't tell you these things when you sign up. But hey, first day sh
 input("Press Enter to Start")
 core.clear()
 while hour < 6:
+    print("#############################")
     if(foxTime == 0): #Checking if Foxy is gone
         foxToken = True
     if(power <= 0):
@@ -66,14 +71,21 @@ while hour < 6:
         hour += 1
         count = 0
     if(count < 10):
-        print(str(hour) + ":0" + str(minute%60))
+        print("Time : " + str(hour) + ":0" + str(minute%60))
     else:
-        print(str(hour) + ":" + str(minute%60))
+        print("Time : " + str(hour) + ":" + str(minute%60))
     print("Power: " + str(power))
     print("Foxy Timer: " + str(foxTime))
     print("Foxy Token: " + str(foxToken))
-
-    while(not action in ["c","ll","ld","rl","rd","n","ftest","btest","ctest","die","tcheck"]): #error correcting list of possible actions
+    print("Chica Threat : " + str(chiThreat))
+    print("Chica Op : " + str(chiOp))
+    print("Chica Position : " + str(chiPos))
+    print("Bonnie Threat : " + str(bonThreat))
+    print("Bonnie Op : " + str(bonOp))
+    print("Bonnie Position : " + str(bonPos))
+    print("#############################")
+####################################################
+    while(not action in ["c","ll","ld","rl","rd","n","ftest","btest","ctest","die","tcheck","win"]): #error correcting list of possible actions
         action = input("What would you like to do? : ") #User decides what action to do for thier turn.
 
     if(action == "c"): #User is checking a camera
@@ -130,8 +142,112 @@ while hour < 6:
         chica()
     if(action == "die"):
         power = 5
-    if(action == "tcheck"):
-        print(threat(hour, bonStag))
+#    if(action == "tcheck"):
+#        print(threat(hour, bonStag, chiStag))
+#        [bonThreat, chiThreat] = threat(hour, bonStag, chiStag)
+#        print("Bonnie: " + str(bonThreat))
+#        print("Chica: " + str(chiThreat))
+    if(action == "win"):
+        hour = 5
+        minute = 55
+###################################### End of Actions
+
+#VVVVVVVVVVVVVVV# Main animatronic AI #VVVVVVVVVVVVVVV#
+
+    if(bonPos in [0,3]): #Checking if Bonnie is in position to take optional path
+        bonOp = 1
+    elif(bonPos in [1,4]): #Checking if Bonnie is in a dead-end optional path
+        bonOp = 2
+    else:
+        bonOp = 0 #Bonnie is on the regular path
+
+    if(chiPos in [1,3]): #Checking if Chica is in position to take optional path
+        chiOp = 1
+    elif(chiPos in [2,4]): #Checking if Chica is in a dead-end optional path
+        chiOp = 2
+    else:
+        chiOp = 0 #Chica is on a regular path
+
+    [bonThreat, chiThreat] = threat(hour, bonStag, chiStag) #Bonnie and Chica's threat is generated.
+
+#VVVVVVVVVVVVVVV# Bonnie AI #VVVVVVVVVVVVVVV#
+
+    if(bonOp == 1): #Bonnie can now reset, stay, go into an optional dead-end path, or progress.
+        if(bonThreat < 26):
+            bonPos = 0
+            print("Bonnie Reset") #FIXME Bonnie keeps going backwards at the start
+        elif(25 < bonThreat < 51):
+            print("Bonnie stays still")
+            bonStag += 1
+        elif(50 < bonThreat < 76):
+            print("Bonnie moves into optional")
+            bonPos += 1
+        else:
+            print("Bonnie moves forward, skipping optional path")
+            bonPos +=2
+    elif(bonOp == 2):#Bonnie can now reset, stay, or get out of the optional dead-end path
+        if(bonThreat < 26):
+            bonPos = 0
+            print("Bonnie Reset")
+        elif(bonThreat < 76):
+            bonPos -= 1
+            print("Bonnie exits dead-end")
+        else:
+            print("Bonnie stays still")
+            bonStag += 1
+    elif(bonOp == 0):#Bonnie can now reset, stay, or progress
+        if(bonThreat < 34):
+            bonPos = 0
+            print("Bonnie Reset")
+        elif(bonThreat < 67):
+            bonPos -= 1
+            print("Bonnie exits dead-end")
+        else:
+            print("Bonnie stays still")
+            bonStag += 1
+
+#VVVVVVVVVVVVVVV# Chica AI #VVVVVVVVVVVVVVV#
+
+    if(chiOp == 1): #Chica can now reset, stay, go into an optional dead-end path, or progress
+        if(chiThreat < 26):
+            chiPos = 0
+            print("Chica Reset")
+        elif(25 < chiThreat < 51):
+            print("Chica stays still")
+            chiStag += 1
+        elif(50 < chiThreat < 76):
+            print("Chica moves into optional")
+            chiPos += 1
+        else:
+            print("Chica moves forward, skipping optional path")
+            chiPos +=2
+    elif(chiOp == 2):#Chica can now reset, stay, or get out of the optional dead-end path
+        if(chiThreat < 26):
+            chiPos = 0
+            print("Chica Reset")
+        elif(chiThreat < 76):
+            chiPos -= 1
+            print("Chica exits dead-end")
+        else:
+            print("Chica stays still")
+            chiStag += 1
+    elif(chiOp == 0):#Chica can now reset, stay, or progress
+        if(chiThreat < 34):
+            chiPos = 0
+            print("Chica Reset")
+        elif(chiThreat < 67):
+            chiStag += 1
+            print("Chica stays still")
+        else:
+            print("Chica moves forward")
+            bonStag += 1
+
+
+
+
+
+
+
 
 
     if(lDoor == True):
