@@ -3,6 +3,7 @@ import sys
 import time
 from os import system, name
 import core
+import campic
 from fnafscares import foxy, bonnie, chica, freddy
 
 minute = 1
@@ -10,19 +11,30 @@ hour = 0
 power = 1000
 
 bonPos = 0
-bonThreat = 0 #FIXME
+bonThreat = 0
 bonStag = 0
 
 chiPos = 0
-chiThreat = 0 #FIXME
+chiThreat = 0
 chiStag = 0
 
 foxPos = 0
 foxTime = 100
+foxToken = False
 
 count = 0
 action = None
 cam = None
+
+lDoor = False
+rDoor = False
+
+def threat(hour, stag):
+    if(hour == 0):
+        roll = (random.randint(1,50) + stag)
+    else:
+        roll = ((random.randint(1,50) + stag) * hour)
+    return roll
 
 def SPrint(string):
     for char in string:
@@ -43,9 +55,13 @@ Uh, now concerning your safety, the only real risk to you as a night watchman he
 Y-Yeah, they don't tell you these things when you sign up. But hey, first day should be a breeze. I'll chat with you tomorrow. Uh, check those cameras, and remember to close the doors only if absolutely necessary. Gotta conserve power. Alright, good night.
 """)
 input("Press Enter to Start")
-
+core.clear()
 while hour < 6:
-    count += 1 #used to insert the 0 before single digit numbers in the minutes place
+    if(foxTime == 0): #Checking if Foxy is gone
+        foxToken = True
+    if(power <= 0):
+        break
+    count += 1 #Used to insert the 0 before single digit numbers in the minutes place
     if(minute%60 == 0):
         hour += 1
         count = 0
@@ -54,22 +70,85 @@ while hour < 6:
     else:
         print(str(hour) + ":" + str(minute%60))
     print("Power: " + str(power))
-    while(not action in ["c","ll","ld","rl","rd","n","ftest","btest","ctest"]):
-        action = input("What would you like to do? : ")
-    if(action == "c"):
-        while(not cam in ["1a","1b","1c","2a","2b","3","4a","4b","5","6","7"]):
-            cam = input("Which camera? : ")
+    print("Foxy Timer: " + str(foxTime))
+    print("Foxy Token: " + str(foxToken))
+
+    while(not action in ["c","ll","ld","rl","rd","n","ftest","btest","ctest","die","tcheck"]): #error correcting list of possible actions
+        action = input("What would you like to do? : ") #User decides what action to do for thier turn.
+
+    if(action == "c"): #User is checking a camera
+        power -= 1
+        while(not cam in ["1a","1b","1c","2a","2b","3","4a","4b","5","6","7"]): #Error correcting list of possible cameras
+            cam = input("Which camera? : ") #User decides which camera to check
+            print("Put cam info here")
+            if(cam == "1c"):
+                if(foxTime > 75):
+                    campic.coveClosed()
+                    print("The curtain is closed in Pirate's Cove.")
+                elif(foxTime > 30):
+                    campic.covePeek()
+                    print("Foxy Peeking Through Cutain")
+                elif(foxTime > 0):
+                    campic.coveWalk()
+                    print("Foxy Out of Curtains")
+                else:
+                    campic.coveGone()
+                    print("Foxy Gone")
+                if(foxToken == False):
+                    foxTime += 10
+                    if(foxTime > 100):
+                        foxTime = 100
+
+    elif(action == "rd"): #Right door toggle
+        if(rDoor == True):
+            rDoor = False
+        else:
+            rDoor = True
+
+    elif(action == "ld"): #Left door toggle
+        if(lDoor == True):
+            lDoor = False
+        else:
+            lDoor = True
+
+    elif(action == "rl"):
+        print("light info")
+        power -= 1
+
+    elif(action == "ll"):
+        print("light info")
+        power -= 1
+
+    elif(action == "n"):
+        print("Time passes...")
+
     if(action == "ftest"):
         foxy()
     if(action == "btest"):
         bonnie()
     if(action == "ctest"):
         chica()
+    if(action == "die"):
+        power = 5
+    if(action == "tcheck"):
+        print(threat(hour, bonStag))
+
+
+    if(lDoor == True):
+        power -= 2
+    if(rDoor == True):
+        power -= 2
+
+    if(cam != "1c"):
+        foxTime -= 1
+    power -= 1 #Ambient power drain
     minute += 1
     action = None
+    cam = None
 
 
-print("""⣉⣭⣭⣭⣭⣭⡭⠭⠭⠭⠭⠬⠭⠥⠭⠍⠉⠉⠉⠉⠉⠭⠭⠭⠥⠤⠤⠭⠥⠭⠬⠥⠭⠬⠥⠭⠭⠍⠉⠛⢛⣉⣉⣉⣉⣉⣉
+if (hour == 6):
+    print("""⣉⣭⣭⣭⣭⣭⡭⠭⠭⠭⠭⠬⠭⠥⠭⠍⠉⠉⠉⠉⠉⠭⠭⠭⠥⠤⠤⠭⠥⠭⠬⠥⠭⠬⠥⠭⠭⠍⠉⠛⢛⣉⣉⣉⣉⣉⣉
 ⣿⣿⣿⣿⣿⣿⣟⢢⠐⠠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠠⠀⢀⢻⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⡿⢎⠣⢌⠠⠁⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣴⣶⡶⠿⠟⠻⢦⣦⠐⠀⠌⣿⣿⣿⣿⡗
 ⣿⣿⣿⣿⣿⡷⣉⠗⡨⣰⣆⣤⣠⣄⣤⣀⣄⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⣤⠞⣟⣻⣭⠤⠴⣤⣔⣈⠤⠉⠆⡁⠈⣽⣿⣿⠋⠀
@@ -91,3 +170,6 @@ print("""⣉⣭⣭⣭⣭⣭⡭⠭⠭⠭⠭⠬⠭⠥⠭⠍⠉⠉⠉⠉⠉⠭⠭�
 ⠀⠀⠀⠀⠀⠀⣘⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣗⣤⢂⠄⡀⢀⠀⡀⢀⠀⡀⠀⣄⣢⣽⣿⣿⢳⡽⠊⠁⠀⠀⠀⠀⠀⠂⠀⠁
 ⠀⠀⠀⠀⠀⣐⣾⣿⡿⡙⣿⣿⢿⣫⠿⣿⣿⣿⣿⣿⣿⣷⣿⣼⣾⣵⣯⣾⣵⣿⣿⣿⣿⣿⠟⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
                      YOU WIN""")
+
+else:
+    foxy()
