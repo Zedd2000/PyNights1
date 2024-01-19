@@ -4,7 +4,7 @@ import time
 from os import system, name
 import core
 import campic
-from fnafscares import foxy, bonnie, chica, freddy
+from scares import foxy, bonnie, chica, freddy
 
 minute = 1
 hour = 0
