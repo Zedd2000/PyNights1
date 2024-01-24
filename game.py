@@ -4,6 +4,7 @@ import time
 from os import system, name
 import core
 import campic
+import foxRun
 from scares import foxy, bonnie, chica, freddy
 
 minute = 1
@@ -61,9 +62,9 @@ Y-Yeah, they don't tell you these things when you sign up. But hey, first day sh
 input("Press Enter to Start")
 core.clear()
 while hour < 6:
-    print("#############################")
-    if(foxTime == 0): #Checking if Foxy is gone
-        foxToken = True
+#    print("++++++++++++++++++++")
+#    if(foxTime == 0): #Checking if Foxy is gone
+#        foxToken = True
     if(power <= 0):
         break
     count += 1 #Used to insert the 0 before single digit numbers in the minutes place
@@ -74,16 +75,18 @@ while hour < 6:
         print("Time : " + str(hour) + ":0" + str(minute%60))
     else:
         print("Time : " + str(hour) + ":" + str(minute%60))
-    print("Power: " + str(power))
-    print("Foxy Timer: " + str(foxTime))
-    print("Foxy Token: " + str(foxToken))
-    print("Chica Threat : " + str(chiThreat))
-    print("Chica Op : " + str(chiOp))
-    print("Chica Position : " + str(chiPos))
-    print("Bonnie Threat : " + str(bonThreat))
-    print("Bonnie Op : " + str(bonOp))
-    print("Bonnie Position : " + str(bonPos))
-    print("#############################")
+#    print("Power: " + str(power))
+#    print("Foxy Timer: " + str(foxTime))
+#    print("Foxy Token: " + str(foxToken))
+#    print("Chica Threat : " + str(chiThreat))
+#    print("Chica Op : " + str(chiOp))
+#    print("Chica Stagnation : " + str(chiStag))
+#    print("Chica Position : " + str(chiPos))
+#    print("Bonnie Threat : " + str(bonThreat))
+#    print("Bonnie Op : " + str(bonOp))
+#    print("Bonnie Position : " + str(bonPos))
+#    print("Bonnie stagnation : " + str(bonStag))
+#    print("--------------------")
 ####################################################
     while(not action in ["c","ll","ld","rl","rd","n","ftest","btest","ctest","die","tcheck","win"]): #error correcting list of possible actions
         action = input("What would you like to do? : ") #User decides what action to do for thier turn.
@@ -92,8 +95,27 @@ while hour < 6:
         power -= 1
         while(not cam in ["1a","1b","1c","2a","2b","3","4a","4b","5","6","7"]): #Error correcting list of possible cameras
             cam = input("Which camera? : ") #User decides which camera to check
-            print("Put cam info here")
-            if(cam == "1c"):
+            if(cam == "1a"): #Check stage camera
+                if(bonPos == 0 and chiPos == 0):
+                    rare = random.randint(0,99)
+                    if(rare == 99):
+                        campic.stageAllLook()
+                    else:
+                        campic.stageAll()
+                elif(bonPos == 0 and chiPos != 0):
+                    campic.stageFBX()
+                elif(bonPos != 0 and chiPos == 0):
+                    campic.stageFXB()
+            elif(cam == "1b"):    #Check dining room camera
+                if(bonPos == 2 and chiPos == 1):
+                    chiPos -= 1
+                if(bonPos == 2):
+                    campic.diningBX()
+                elif(chiPos == 1):
+                    campic.diningXC()
+                else:
+                    campic.diningXX()
+            elif(cam == "1c"):    #Check Foxy camera
                 if(foxTime > 75):
                     campic.coveClosed()
                     print("The curtain is closed in Pirate's Cove.")
@@ -110,6 +132,39 @@ while hour < 6:
                     foxTime += 10
                     if(foxTime > 100):
                         foxTime = 100
+            elif(cam == "2a"):
+                if(bonPos == 3):
+                    campic.lHallFarB()
+                else:
+                    campic.lHallFarX()
+            elif(cam == "2b"):
+                if(bonPos == 5):
+                    campic.lHallCloseB()
+                else:
+                    campic.lHallCloseX()
+            elif(cam == "3"):
+                if(bonPos == 4):
+                    campic.supplyB()
+                else:
+                    campic.supplyX()
+            elif(cam == "4a"):
+                if(chiPos == 3):
+                    campic.rHallFarC()
+                else:
+                    campic.rHallFarX()
+            elif(cam == "4b"):
+                if(chiPos == 5):
+                    campic.rHallCloseC()
+                else:
+                    campic.rHallCloseX()
+            elif(cam == "5"):
+                if(bonPos == 5):
+                    campic.backstageB()
+                else:
+                    campic.backstageX()
+
+
+
 
     elif(action == "rd"): #Right door toggle
         if(rDoor == True):
@@ -123,15 +178,15 @@ while hour < 6:
         else:
             lDoor = True
 
-    elif(action == "rl"):
+    elif(action == "rl"): #Right light check
         print("light info")
         power -= 1
 
-    elif(action == "ll"):
+    elif(action == "ll"): #Left light check
         print("light info")
         power -= 1
 
-    elif(action == "n"):
+    elif(action == "n"): # Do nothing, pass time.
         print("Time passes...")
 
     if(action == "ftest"):
@@ -175,6 +230,7 @@ while hour < 6:
     if(bonOp == 1): #Bonnie can now reset, stay, go into an optional dead-end path, or progress.
         if(bonThreat < 26):
             bonPos = 0
+            bonStag = 0
             print("Bonnie Reset") #FIXME Bonnie keeps going backwards at the start
         elif(25 < bonThreat < 51):
             print("Bonnie stays still")
@@ -182,15 +238,19 @@ while hour < 6:
         elif(50 < bonThreat < 76):
             print("Bonnie moves into optional")
             bonPos += 1
+            bonStag = 0
         else:
             print("Bonnie moves forward, skipping optional path")
             bonPos +=2
+            bonStag = 0
     elif(bonOp == 2):#Bonnie can now reset, stay, or get out of the optional dead-end path
         if(bonThreat < 26):
             bonPos = 0
+            bonStag = 0
             print("Bonnie Reset")
         elif(bonThreat < 76):
             bonPos -= 1
+            bonStag = 0
             print("Bonnie exits dead-end")
         else:
             print("Bonnie stays still")
@@ -198,9 +258,11 @@ while hour < 6:
     elif(bonOp == 0):#Bonnie can now reset, stay, or progress
         if(bonThreat < 34):
             bonPos = 0
+            bonStag = 0
             print("Bonnie Reset")
         elif(bonThreat < 67):
             bonPos -= 1
+            bonStag = 0
             print("Bonnie exits dead-end")
         else:
             print("Bonnie stays still")
@@ -211,6 +273,7 @@ while hour < 6:
     if(chiOp == 1): #Chica can now reset, stay, go into an optional dead-end path, or progress
         if(chiThreat < 26):
             chiPos = 0
+            chiStag = 0
             print("Chica Reset")
         elif(25 < chiThreat < 51):
             print("Chica stays still")
@@ -218,15 +281,19 @@ while hour < 6:
         elif(50 < chiThreat < 76):
             print("Chica moves into optional")
             chiPos += 1
+            chiStag = 0
         else:
             print("Chica moves forward, skipping optional path")
             chiPos +=2
+            chiStag = 0
     elif(chiOp == 2):#Chica can now reset, stay, or get out of the optional dead-end path
         if(chiThreat < 26):
             chiPos = 0
+            chiStag = 0
             print("Chica Reset")
         elif(chiThreat < 76):
             chiPos -= 1
+            chiStag = 0
             print("Chica exits dead-end")
         else:
             print("Chica stays still")
@@ -235,12 +302,14 @@ while hour < 6:
         if(chiThreat < 34):
             chiPos = 0
             print("Chica Reset")
+            chiStag = 0
         elif(chiThreat < 67):
             chiStag += 1
             print("Chica stays still")
         else:
             print("Chica moves forward")
-            bonStag += 1
+            chiPos += 1
+            chiStag = 0
 
 
 
@@ -256,11 +325,27 @@ while hour < 6:
         power -= 2
 
     if(cam != "1c"):
-        foxTime -= 1
+        foxTime -= hour
     power -= 1 #Ambient power drain
     minute += 1
     action = None
     cam = None
+
+    print("++++++++++++++++++++")
+    if(foxTime == 0): #Checking if Foxy is gone
+        foxToken = True
+    print("Power: " + str(power))
+    print("Foxy Timer: " + str(foxTime))
+    print("Foxy Token: " + str(foxToken))
+    print("Chica Threat : " + str(chiThreat))
+    print("Chica Op : " + str(chiOp))
+    print("Chica Stagnation : " + str(chiStag))
+    print("Chica Position : " + str(chiPos))
+    print("Bonnie Threat : " + str(bonThreat))
+    print("Bonnie Op : " + str(bonOp))
+    print("Bonnie Position : " + str(bonPos))
+    print("Bonnie stagnation : " + str(bonStag))
+    print("--------------------")
 
 
 if (hour == 6):
