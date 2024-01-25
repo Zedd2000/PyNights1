@@ -130,7 +130,7 @@ while hour < 6:
                     foxTime += 10
                     if(foxTime > 100):
                         foxTime = 100
-            elif(cam == "2a"): # Far left hall camera
+            elif(cam == "2a"): # Far left hall camera FIXME FIXME Add running Foxy overlap logic
                 if(bonPos == 3):
                     campic.lHallFarB()
                 else:
