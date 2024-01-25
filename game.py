@@ -242,8 +242,8 @@ while hour < 6:
     if(bonOp == 1): #Bonnie can now reset, stay, go into an optional dead-end path, or progress.
         if(bonThreat < 26):
             bonPos = 0
-            bonStag = 0
-            print("Bonnie Reset") #FIXME Bonnie keeps going backwards at the start
+            bonStag = 1
+            print("Bonnie Reset")
         elif(25 < bonThreat < 51):
             print("Bonnie stays still")
             bonStag += 1
@@ -258,7 +258,7 @@ while hour < 6:
     elif(bonOp == 2):#Bonnie can now reset, stay, or get out of the optional dead-end path
         if(bonThreat < 26):
             bonPos = 0
-            bonStag = 0
+            bonStag = 1
             print("Bonnie Reset")
         elif(bonThreat < 76):
             bonPos -= 1
@@ -270,15 +270,15 @@ while hour < 6:
     elif(bonOp == 0):#Bonnie can now reset, stay, or progress
         if(bonThreat < 34):
             bonPos = 0
-            bonStag = 0
+            bonStag = 1
             print("Bonnie Reset")
         elif(bonThreat < 67):
-            bonPos -= 1
-            bonStag = 0
-            print("Bonnie exits dead-end")
-        else:
-            print("Bonnie stays still")
             bonStag += 1
+            print("Bonnie stays still")
+        else:
+            print("Bonnie progresses")
+            bonPos += 1
+            bonStag = 0
 
 #VVVVVVVVVVVVVVV# Chica AI #VVVVVVVVVVVVVVV#
 
@@ -313,8 +313,8 @@ while hour < 6:
     elif(chiOp == 0):#Chica can now reset, stay, or progress
         if(chiThreat < 34):
             chiPos = 0
+            chiStag = 1
             print("Chica Reset")
-            chiStag = 0
         elif(chiThreat < 67):
             chiStag += 1
             print("Chica stays still")
