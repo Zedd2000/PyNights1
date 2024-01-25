@@ -62,9 +62,6 @@ Y-Yeah, they don't tell you these things when you sign up. But hey, first day sh
 input("Press Enter to Start")
 core.clear()
 while hour < 6:
-#    print("++++++++++++++++++++")
-#    if(foxTime == 0): #Checking if Foxy is gone
-#        foxToken = True
     if(power <= 0):
         break
     count += 1 #Used to insert the 0 before single digit numbers in the minutes place
@@ -75,19 +72,6 @@ while hour < 6:
         print("Time : " + str(hour) + ":0" + str(minute%60))
     else:
         print("Time : " + str(hour) + ":" + str(minute%60))
-#    print("Power: " + str(power))
-#    print("Foxy Timer: " + str(foxTime))
-#    print("Foxy Token: " + str(foxToken))
-#    print("Chica Threat : " + str(chiThreat))
-#    print("Chica Op : " + str(chiOp))
-#    print("Chica Stagnation : " + str(chiStag))
-#    print("Chica Position : " + str(chiPos))
-#    print("Bonnie Threat : " + str(bonThreat))
-#    print("Bonnie Op : " + str(bonOp))
-#    print("Bonnie Position : " + str(bonPos))
-#    print("Bonnie stagnation : " + str(bonStag))
-#    print("--------------------")
-####################################################
     while(not action in ["c","ll","ld","rl","rd","n","ftest","btest","ctest","die","tcheck","win"]): #error correcting list of possible actions
         print("#####################################################################################################################################################")
         print("# c : Check cameras | ll : Toggle left light | ld : Toggle left door | rl : Toggle right light | rd : Toggle Right Door | n : Do nothing, pass time #")
