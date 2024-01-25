@@ -89,11 +89,25 @@ while hour < 6:
 #    print("--------------------")
 ####################################################
     while(not action in ["c","ll","ld","rl","rd","n","ftest","btest","ctest","die","tcheck","win"]): #error correcting list of possible actions
+        print("#####################################################################################################################################################")
+        print("# c : Check cameras | ll : Toggle left light | ld : Toggle left door | rl : Toggle right light | rd : Toggle Right Door | n : Do nothing, pass time #")
+        print("#####################################################################################################################################################")
         action = input("What would you like to do? : ") #User decides what action to do for thier turn.
 
     if(action == "c"): #User is checking a camera
         power -= 1
         while(not cam in ["1a","1b","1c","2a","2b","3","4a","4b","5","6","7"]): #Error correcting list of possible cameras
+            print("""1a  : Stage
+1a  : Dining Hall
+1c  : Pirate's Cove
+2a  : Northwest Hall
+2b  : SouthWest Hall
+3   : Supply Closet
+4a  : Northeast Hall
+4b  : Southeast Hall
+5   : Backstage
+6   : Kitchen
+7   : Bathroom Hall""")
             cam = input("Which camera? : ") #User decides which camera to check
             if(cam == "1a"): #Check stage camera
                 if(bonPos == 0 and chiPos == 0):
@@ -163,8 +177,8 @@ while hour < 6:
                 else:
                     campic.backstageX()
             elif(cam == "6"): # Kitchen camera with audio only
-                    print("""*NO VIDEO*
-                    *AUDIO ONLY*""")
+                print("""*NO VIDEO*
+                *AUDIO ONLY*""")
                 if(chiPos == 4):
                     print("You hear the rustling of pots and pans")
                 else:
@@ -280,6 +294,12 @@ while hour < 6:
             bonPos += 1
             bonStag = 0
 
+    if(bonPos == 8):
+        if(lDoor == True):
+            bonPos = 7
+        else:
+            scares.bonnie()
+
 #VVVVVVVVVVVVVVV# Chica AI #VVVVVVVVVVVVVVV#
 
     if(chiOp == 1): #Chica can now reset, stay, go into an optional dead-end path, or progress
@@ -323,6 +343,11 @@ while hour < 6:
             chiPos += 1
             chiStag = 0
 
+    if(chiPos == 8):
+        if(rDoor == True):
+            chiPos = 7
+        else:
+            scares.chica()
 
 
 
