@@ -132,37 +132,49 @@ while hour < 6:
                     foxTime += 10
                     if(foxTime > 100):
                         foxTime = 100
-            elif(cam == "2a"):
+            elif(cam == "2a"): # Far left hall camera
                 if(bonPos == 3):
                     campic.lHallFarB()
                 else:
                     campic.lHallFarX()
             elif(cam == "2b"):
-                if(bonPos == 5):
+                if(bonPos == 5): # Close left hall camera
                     campic.lHallCloseB()
                 else:
                     campic.lHallCloseX()
-            elif(cam == "3"):
+            elif(cam == "3"): # Supply closet camera
                 if(bonPos == 4):
                     campic.supplyB()
                 else:
                     campic.supplyX()
-            elif(cam == "4a"):
+            elif(cam == "4a"): # Far right hall camera
                 if(chiPos == 3):
                     campic.rHallFarC()
                 else:
                     campic.rHallFarX()
-            elif(cam == "4b"):
+            elif(cam == "4b"): # Close right hall camera
                 if(chiPos == 5):
                     campic.rHallCloseC()
                 else:
                     campic.rHallCloseX()
-            elif(cam == "5"):
+            elif(cam == "5"): # Backstage camera
                 if(bonPos == 5):
                     campic.backstageB()
                 else:
                     campic.backstageX()
-
+            elif(cam == "6"): # Kitchen camera with audio only
+                    print("""*NO VIDEO*
+                    *AUDIO ONLY*""")
+                if(chiPos == 4):
+                    print("You hear the rustling of pots and pans")
+                else:
+                    print("Nothing can be heard")
+            elif(cam == "7"): # Outside of bathrooms camera
+                if(chiPos == 2):
+                    campic.restroomC()
+                else:
+                    campic.restroomX()
+            #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^# End of camera action
 
 
 
