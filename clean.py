@@ -9,7 +9,7 @@ from scares import foxy, bonnie, chica, freddy
 
 minute = 1
 hour = 0
-power = 1000
+power = 500
 
 bonPos = 0
 bonThreat = 0
@@ -41,14 +41,14 @@ def threat(hour, bstag, cstag):
         rollc = ((random.randint(1,50) + cstag) * hour)
     return rollb, rollc
 
-def SPrint(string):
+def SPrint(pause, string):
     for char in string:
         sys.stdout.write(char)
         sys.stdout.flush()
-        time.sleep(0.00025)
+        time.sleep(pause)
 
 core.clear()
-SPrint("""Hello? Hello, hello? Uh, I wanted to record a message for you to help you get settled in on your first night. Um, I actually worked in that office before you. I'm finishing up my last week now, as a matter of fact. So, I know it can be a bit overwhelming, but I'm here to tell you there's nothing to worry about. Uh, you'll do fine. So, let's just focus on getting you through your first week, okay?
+SPrint(0.00025,"""Hello? Hello, hello? Uh, I wanted to record a message for you to help you get settled in on your first night. Um, I actually worked in that office before you. I'm finishing up my last week now, as a matter of fact. So, I know it can be a bit overwhelming, but I'm here to tell you there's nothing to worry about. Uh, you'll do fine. So, let's just focus on getting you through your first week, okay?
 Uh, let's see, first there's an introductory greeting from the company that I'm supposed to read. Uh, it's kind of a legal thing, you know. Um, "Welcome to Freddy Fazbear's Pizza. A magical place for kids and grown-ups alike, where fantasy and fun come to life. Fazbear Entertainment is not responsible for damage to property or person. Upon discovering that damage or death has occurred, a missing person report will be filed within 90 days, or as soon property and premises have been thoroughly cleaned and bleached, and the carpets have been replaced."
 
 Blah, blah, blah. Now that might sound bad, I know, but there's really nothing to worry about. Uh, the animatronic characters here do get a bit quirky at night, but do I blame them? No. If I were forced to sing those same stupid songs for twenty years and I never got a bath? I'd probably be a bit irritable at night too. So, remember, these characters hold a special place in the hearts of children and we need to show them a little respect, right? Okay.
@@ -131,7 +131,7 @@ while hour < 6:
                     foxTime += 10
                     if(foxTime > 100):
                         foxTime = 100
-            elif(cam == "2a"): # Far left hall camera FIXME FIXME Add running Foxy overlap logic
+            elif(cam == "2a"): # Far left hall camera
                 if(foxPos == 2 and bonPos ==3):
                     bonPos -= 1
                 if(foxPos == 2):
@@ -205,7 +205,7 @@ while hour < 6:
         print("Time passes...")
 
     if(action == "ftest"):
-        foxy()
+        foxRun.fRun()
     if(action == "btest"):
         bonnie()
     if(action == "ctest"):
@@ -380,15 +380,15 @@ while hour < 6:
 #    print("Chica Op : " + str(chiOp))
 #    print("Chica Stagnation : " + str(chiStag))
 #    print("Chica Position : " + str(chiPos))
-#    print("Bonnie Threat : " + str(bonThreat))
-#    print("Bonnie Op : " + str(bonOp))
+#   print("Bonnie Threat : " + str(bonThreat))
+#   print("Bonnie Op : " + str(bonOp))
 #    print("Bonnie Position : " + str(bonPos))
 #    print("Bonnie stagnation : " + str(bonStag))
 #    print("--------------------")
 
 
 if (hour == 6):
-    print("""⣉⣭⣭⣭⣭⣭⡭⠭⠭⠭⠭⠬⠭⠥⠭⠍⠉⠉⠉⠉⠉⠭⠭⠭⠥⠤⠤⠭⠥⠭⠬⠥⠭⠬⠥⠭⠭⠍⠉⠛⢛⣉⣉⣉⣉⣉⣉
+    Sprint(0.025,"""⣉⣭⣭⣭⣭⣭⡭⠭⠭⠭⠭⠬⠭⠥⠭⠍⠉⠉⠉⠉⠉⠭⠭⠭⠥⠤⠤⠭⠥⠭⠬⠥⠭⠬⠥⠭⠭⠍⠉⠛⢛⣉⣉⣉⣉⣉⣉
 ⣿⣿⣿⣿⣿⣿⣟⢢⠐⠠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠠⠀⢀⢻⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⡿⢎⠣⢌⠠⠁⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣴⣶⡶⠿⠟⠻⢦⣦⠐⠀⠌⣿⣿⣿⣿⡗
 ⣿⣿⣿⣿⣿⡷⣉⠗⡨⣰⣆⣤⣠⣄⣤⣀⣄⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⣤⠞⣟⣻⣭⠤⠴⣤⣔⣈⠤⠉⠆⡁⠈⣽⣿⣿⠋⠀
