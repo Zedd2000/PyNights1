@@ -105,6 +105,8 @@ while hour < 6:
                     campic.stageFBX()
                 elif(bonPos != 0 and chiPos == 0):
                     campic.stageFXC()
+                else:
+                    campic.stageFXX()
             elif(cam == "1b"):    #Check dining room camera
                 if(bonPos == 2 and chiPos == 1):
                     chiPos -= 1
