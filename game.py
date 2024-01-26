@@ -5,7 +5,7 @@ from os import system, name
 import core
 import campic
 import foxRun
-from scares import foxy, bonnie, chica, freddy
+from scares import foxy, bonnie, chica, fredCool
 
 minute = 1
 hour = 0
@@ -209,7 +209,7 @@ while hour < 6:
         print("Time passes...")
 
     if(action == "ftest"):
-        foxRun.fRun()
+        fredCool()
     if(action == "btest"):
         bonnie()
     if(action == "ctest"):
@@ -422,4 +422,4 @@ if (hour == 6):
                      YOU WIN""")
 
 else:
-    foxy()
+    fredCool()
