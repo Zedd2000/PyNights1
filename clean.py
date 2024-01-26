@@ -5,7 +5,7 @@ from os import system, name
 import core
 import campic
 import foxRun
-from scares import foxy, bonnie, chica, freddy
+from scares import foxy, bonnie, chica, fredCool
 
 minute = 1
 hour = 0
@@ -209,7 +209,7 @@ while hour < 6:
         print("Time passes...")
 
     if(action == "ftest"):
-        foxRun.fRun()
+        fredCool()
     if(action == "btest"):
         bonnie()
     if(action == "ctest"):
@@ -279,7 +279,7 @@ while hour < 6:
                 if(bonPos > 2):# Bonnie can reset if past the Dining Hall
                     bonPos = 0
                     bonStag = 1
-#                   print("Bonnie Reset")
+#                    print("Bonnie Reset")
         elif(bonThreat < 67):
             bonStag += 1
 #            print("Bonnie stays still")
@@ -355,7 +355,7 @@ while hour < 6:
     if(rDoor == True):
         power -= 2
 
-    print("Cam: " + str(cam))
+ #   print("Cam: " + str(cam))
     if(cam != "1c"):
         if(hour == 0):
             foxTime -= 1
@@ -378,9 +378,10 @@ while hour < 6:
     if(foxToken == True):
         foxPos += 1
 
-    print("++++++++++++++++++++")
+#    print("++++++++++++++++++++")
     if(foxTime == 0): #Checking if Foxy is gone
         foxToken = True
+#    print("Power: " + str(power))
 #    print("Foxy Timer: " + str(foxTime))
 #    print("Foxy Token: " + str(foxToken))
 #    print("Foxy Position: " + str(foxPos))
@@ -421,4 +422,4 @@ if (hour == 6):
                      YOU WIN""")
 
 else:
-    foxy()
+    fredCool()
