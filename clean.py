@@ -83,7 +83,7 @@ while hour < 6:
         power -= 1
         while(not cam in ["1a","1b","1c","2a","2b","3","4a","4b","5","6","7"]): #Error correcting list of possible cameras
             print("""1a  : Stage
-1a  : Dining Hall
+1b  : Dining Hall
 1c  : Pirate's Cove
 2a  : Northwest Hall
 2b  : SouthWest Hall
@@ -184,14 +184,18 @@ while hour < 6:
     elif(action == "rd"): #Right door toggle
         if(rDoor == True):
             rDoor = False
+            print("Right door closed")
         else:
             rDoor = True
+            print("Right door opened")
 
     elif(action == "ld"): #Left door toggle
         if(lDoor == True):
             lDoor = False
+            print("Left door closed")
         else:
             lDoor = True
+            print("Left door opened")
 
     elif(action == "rl"): #Right light check
         print("light info")
@@ -239,42 +243,48 @@ while hour < 6:
 
     if(bonOp == 1): #Bonnie can now reset, stay, go into an optional dead-end path, or progress.
         if(bonThreat < 26):
-            bonPos = 0
-            bonStag = 1
-            #print("Bonnie Reset")
+            if(bonPos != 0):
+                if(bonPos > 2):# Bonnie can reset if past the Dining Hall
+                    bonPos = 0
+                    bonStag = 1
+#            print("Bonnie Reset")
         elif(25 < bonThreat < 51):
-            #print("Bonnie stays still")
+#            print("Bonnie stays still")
             bonStag += 1
         elif(50 < bonThreat < 76):
-            #print("Bonnie moves into optional")
+#            print("Bonnie moves into optional")
             bonPos += 1
             bonStag = 0
         else:
-            #print("Bonnie moves forward, skipping optional path")
+#            print("Bonnie moves forward, skipping optional path")
             bonPos +=2
             bonStag = 0
     elif(bonOp == 2):#Bonnie can now reset, stay, or get out of the optional dead-end path
         if(bonThreat < 26):
-            bonPos = 0
-            bonStag = 1
-            #print("Bonnie Reset")
+            if(bonPos != 0):
+                if(bonPos > 2):# Bonnie can reset if past the Dining Hall
+                    bonPos = 0
+                    bonStag = 1
+#                    print("Bonnie Reset")
         elif(bonThreat < 76):
             bonPos -= 1
             bonStag = 0
-            #print("Bonnie exits dead-end")
+#            print("Bonnie exits dead-end")
         else:
-            #print("Bonnie stays still")
+#            print("Bonnie stays still")
             bonStag += 1
     elif(bonOp == 0):#Bonnie can now reset, stay, or progress
         if(bonThreat < 34):
-            bonPos = 0
-            bonStag = 1
-            #print("Bonnie Reset")
+            if(bonPos != 0):
+                if(bonPos > 2):# Bonnie can reset if past the Dining Hall
+                    bonPos = 0
+                    bonStag = 1
+#                   print("Bonnie Reset")
         elif(bonThreat < 67):
             bonStag += 1
-            #print("Bonnie stays still")
+#            print("Bonnie stays still")
         else:
-            #print("Bonnie progresses")
+#            print("Bonnie progresses")
             bonPos += 1
             bonStag = 0
 
@@ -288,42 +298,48 @@ while hour < 6:
 
     if(chiOp == 1): #Chica can now reset, stay, go into an optional dead-end path, or progress
         if(chiThreat < 26):
-            chiPos = 0
-            chiStag = 0
-            #print("Chica Reset")
+            if(chiPos != 0):
+                if(chiPos > 2):# Chica can reset if past the Dining Hall
+                    chiPos = 0
+                    chiStag = 1
+#                    print("Chica Reset")
         elif(25 < chiThreat < 51):
-            #print("Chica stays still")
+#            print("Chica stays still")
             chiStag += 1
         elif(50 < chiThreat < 76):
-            #print("Chica moves into optional")
+#            print("Chica moves into optional")
             chiPos += 1
             chiStag = 0
         else:
-            #print("Chica moves forward, skipping optional path")
+#            print("Chica moves forward, skipping optional path")
             chiPos +=2
             chiStag = 0
     elif(chiOp == 2):#Chica can now reset, stay, or get out of the optional dead-end path
         if(chiThreat < 26):
-            chiPos = 0
-            chiStag = 0
-            #print("Chica Reset")
+            if(chiPos != 0):
+                if(chiPos > 2):# Chica can reset if past the Dining Hall
+                    chiPos = 0
+                    chiStag = 1
+#                    print("Chica Reset")
         elif(chiThreat < 76):
             chiPos -= 1
             chiStag = 0
-            #print("Chica exits dead-end")
+#            print("Chica exits dead-end")
         else:
-            #print("Chica stays still")
+#            print("Chica stays still")
             chiStag += 1
     elif(chiOp == 0):#Chica can now reset, stay, or progress
         if(chiThreat < 34):
-            chiPos = 0
-            chiStag = 1
-            #print("Chica Reset")
+            if(chiPos != 0):
+                if(chiPos > 2):# Chica can reset if past the Dining Hall
+                    chiPos = 0
+                    chiStag = 1
+#                    print("Chica Reset")
         elif(chiThreat < 67):
             chiStag += 1
-            #print("Chica stays still")
+#            print("Chica stays still")
         else:
-            #print("Chica moves forward")
+#            print("Chica moves forward")
             chiPos += 1
             chiStag = 0
 
@@ -332,13 +348,7 @@ while hour < 6:
             chiPos = 7
         else:
             chica()
-
-
-
-
-
-
-
+############################################
 
     if(lDoor == True):
         power -= 2
@@ -371,7 +381,6 @@ while hour < 6:
     print("++++++++++++++++++++")
     if(foxTime == 0): #Checking if Foxy is gone
         foxToken = True
-#    print("Power: " + str(power))
 #    print("Foxy Timer: " + str(foxTime))
 #    print("Foxy Token: " + str(foxToken))
 #    print("Foxy Position: " + str(foxPos))
@@ -380,15 +389,15 @@ while hour < 6:
 #    print("Chica Op : " + str(chiOp))
 #    print("Chica Stagnation : " + str(chiStag))
 #    print("Chica Position : " + str(chiPos))
-#   print("Bonnie Threat : " + str(bonThreat))
-#   print("Bonnie Op : " + str(bonOp))
+#    print("Bonnie Threat : " + str(bonThreat))
+#    print("Bonnie Op : " + str(bonOp))
 #    print("Bonnie Position : " + str(bonPos))
 #    print("Bonnie stagnation : " + str(bonStag))
 #    print("--------------------")
 
 
 if (hour == 6):
-    Sprint(0.025,"""⣉⣭⣭⣭⣭⣭⡭⠭⠭⠭⠭⠬⠭⠥⠭⠍⠉⠉⠉⠉⠉⠭⠭⠭⠥⠤⠤⠭⠥⠭⠬⠥⠭⠬⠥⠭⠭⠍⠉⠛⢛⣉⣉⣉⣉⣉⣉
+    SPrint(0.05,"""⣉⣭⣭⣭⣭⣭⡭⠭⠭⠭⠭⠬⠭⠥⠭⠍⠉⠉⠉⠉⠉⠭⠭⠭⠥⠤⠤⠭⠥⠭⠬⠥⠭⠬⠥⠭⠭⠍⠉⠛⢛⣉⣉⣉⣉⣉⣉
 ⣿⣿⣿⣿⣿⣿⣟⢢⠐⠠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠠⠀⢀⢻⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⡿⢎⠣⢌⠠⠁⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣴⣶⡶⠿⠟⠻⢦⣦⠐⠀⠌⣿⣿⣿⣿⡗
 ⣿⣿⣿⣿⣿⡷⣉⠗⡨⣰⣆⣤⣠⣄⣤⣀⣄⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⣤⠞⣟⣻⣭⠤⠴⣤⣔⣈⠤⠉⠆⡁⠈⣽⣿⣿⠋⠀
