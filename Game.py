@@ -215,10 +215,10 @@ while hour < 6:
     elif(action == "rd"): # Right door toggle
         if(rDoor == True):
             rDoor = False
-            print("Right door closed")
+            print("Right door opened")
         else:
             rDoor = True
-            print("Right door opened")
+            print("Right door closed")
 
     elif(action == "ld"): # Left door toggle
         if(lDoor == True):
