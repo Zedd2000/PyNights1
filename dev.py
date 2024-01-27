@@ -223,10 +223,10 @@ while hour < 6:
     elif(action == "ld"): # Left door toggle
         if(lDoor == True):
             lDoor = False
-            print("Left door closed")
+            print("Left door opened")
         else:
             lDoor = True
-            print("Left door opened")
+            print("Left door closed")
 
     elif(action == "rl"): # Right light check
         if(chiPos == 7):
