@@ -97,7 +97,7 @@ while hour < 6:
     else:
         print("Time : " + str(hour) + ":" + str(minute%60))
     print("Power : " + str(power))
-    while(not action in ["c","ll","ld","rl","rd","n","ftest","btest","ctest","die","tcheck","gtest","win"]): #error correcting list of possible actions
+    while(not action in ["c","ll","ld","rl","rd","n","m","ftest","btest","ctest","die","tcheck","gtest","win"]): #error correcting list of possible actions
         print("#####################################################################################################################################################")
         print("# c : Check cameras | ll : Toggle left light | ld : Toggle left door | rl : Toggle right light | rd : Toggle Right Door | n : Do nothing, pass time #")
         print("#####################################################################################################################################################")
@@ -112,6 +112,7 @@ while hour < 6:
         preGold += 1 # If the player does nothing but check cameras they will eventually encounter Golden Freddy
         power -= 1
         while(not cam in ["1a","1b","1c","2a","2b","3","4a","4b","5","6","7"]): # Error correcting list of possible cameras
+            campic.map()
             print("""1a  : Stage
 1b  : Dining Hall
 1c  : Pirate's Cove
