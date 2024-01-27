@@ -7,9 +7,11 @@ import campic
 import foxRun
 from scares import foxy, bonnie, chica, fredCool
 
+#TODO add movement timers to make animatronics stay in place for at least 2 turns
+
 minute = 1
 hour = 0
-power = 500
+power = 1000
 
 bonPos = 0
 bonThreat = 0
@@ -24,6 +26,10 @@ chiOp = 0
 foxPos = 0
 foxTime = 100
 foxToken = False
+
+preGold = 0
+goldToken = False
+gold = 0
 
 count = 0
 action = None
@@ -46,6 +52,24 @@ def SPrint(pause, string):
         sys.stdout.write(char)
         sys.stdout.flush()
         time.sleep(pause)
+
+def rareRoll(chance):
+    return random.randint(0,chance)
+
+def gold():
+    while True:
+        rand = random.randint(0,4)
+        if(rand == 0):
+            campic.goldFlash()
+        elif(rand == 1):
+            campic.goldSprite()
+        elif(rand == 2):
+            campic.goldFull()
+        elif(rand == 3):
+            campic.goldLimp()
+        else:
+            campic.goldStare()
+        time.sleep(0.0416)
 
 core.clear()
 SPrint(0.00025,"""Hello? Hello, hello? Uh, I wanted to record a message for you to help you get settled in on your first night. Um, I actually worked in that office before you. I'm finishing up my last week now, as a matter of fact. So, I know it can be a bit overwhelming, but I'm here to tell you there's nothing to worry about. Uh, you'll do fine. So, let's just focus on getting you through your first week, okay?
@@ -73,15 +97,21 @@ while hour < 6:
     else:
         print("Time : " + str(hour) + ":" + str(minute%60))
     print("Power : " + str(power))
-    while(not action in ["c","ll","ld","rl","rd","n","ftest","btest","ctest","die","tcheck","win"]): #error correcting list of possible actions
+    while(not action in ["c","ll","ld","rl","rd","n","ftest","btest","ctest","die","tcheck","gtest","win"]): #error correcting list of possible actions
         print("#####################################################################################################################################################")
         print("# c : Check cameras | ll : Toggle left light | ld : Toggle left door | rl : Toggle right light | rd : Toggle Right Door | n : Do nothing, pass time #")
         print("#####################################################################################################################################################")
         action = input("What would you like to do? : ") #User decides what action to do for thier turn.
+        core.clear()
+        if(goldToken == True):
+            if(rareRoll(9) == 9):
+                campic.goldFlash()
+                gold += 1
 
     if(action == "c"): #User is checking a camera
+        preGold += 1 # If the player does nothing but check cameras they will eventually encounter Golden Freddy
         power -= 1
-        while(not cam in ["1a","1b","1c","2a","2b","3","4a","4b","5","6","7"]): #Error correcting list of possible cameras
+        while(not cam in ["1a","1b","1c","2a","2b","3","4a","4b","5","6","7"]): # Error correcting list of possible cameras
             print("""1a  : Stage
 1b  : Dining Hall
 1c  : Pirate's Cove
@@ -93,11 +123,10 @@ while hour < 6:
 5   : Backstage
 6   : Kitchen
 7   : Bathroom Hall""")
-            cam = input("Which camera? : ") #User decides which camera to check
-            if(cam == "1a"): #Check stage camera
+            cam = input("Which camera? : ") # User decides which camera to check
+            if(cam == "1a"): # Check stage camera
                 if(bonPos == 0 and chiPos == 0):
-                    rare = random.randint(0,99)
-                    if(rare == 99):
+                    if(rareRoll(9) == 9):
                         campic.stageAllLook()
                     else:
                         campic.stageAll()
@@ -107,7 +136,7 @@ while hour < 6:
                     campic.stageFXC()
                 else:
                     campic.stageFXX()
-            elif(cam == "1b"):    #Check dining room camera
+            elif(cam == "1b"):    # Check dining room camera
                 if(bonPos == 2 and chiPos == 1):
                     chiPos -= 1
                 if(bonPos == 2):
@@ -116,7 +145,7 @@ while hour < 6:
                     campic.diningXC()
                 else:
                     campic.diningXX()
-            elif(cam == "1c"):    #Check Foxy camera
+            elif(cam == "1c"):    # Check Foxy camera
                 if(foxTime > 75):
                     campic.coveClosed()
                     print("The curtain is closed in Pirate's Cove.")
@@ -183,7 +212,7 @@ while hour < 6:
 
 
 
-    elif(action == "rd"): #Right door toggle
+    elif(action == "rd"): # Right door toggle
         if(rDoor == True):
             rDoor = False
             print("Right door closed")
@@ -191,7 +220,7 @@ while hour < 6:
             rDoor = True
             print("Right door opened")
 
-    elif(action == "ld"): #Left door toggle
+    elif(action == "ld"): # Left door toggle
         if(lDoor == True):
             lDoor = False
             print("Left door closed")
@@ -199,23 +228,30 @@ while hour < 6:
             lDoor = True
             print("Left door opened")
 
-    elif(action == "rl"): #Right light check
-        print("light info")
+    elif(action == "rl"): # Right light check
+        if(chiPos == 7):
+            campic.rLightC()
+            print("Chica is at the door.")
         power -= 1
 
-    elif(action == "ll"): #Left light check
-        print("light info")
+    elif(action == "ll"): # Left light check
+        if(bonPos == 7):
+            campic.lLightB()
+            print("Bonnie is at the door.")
         power -= 1
 
     elif(action == "n"): # Do nothing, pass time.
         print("Time passes...")
 
+#VVVVVVVVV Test Actions VVVVVVVVVVV
     if(action == "ftest"):
         fredCool()
     if(action == "btest"):
         bonnie()
     if(action == "ctest"):
         chica()
+    if(action == "gtest"):
+        gold()
     if(action == "die"):
         power = 5
     if(action == "win"):
@@ -225,25 +261,25 @@ while hour < 6:
 
 #VVVVVVVVVVVVVVV# Main animatronic AI #VVVVVVVVVVVVVVV#
 
-    if(bonPos in [0,3]): #Checking if Bonnie is in position to take optional path
+    if(bonPos in [0,3]): # Checking if Bonnie is in position to take optional path
         bonOp = 1
-    elif(bonPos in [1,4]): #Checking if Bonnie is in a dead-end optional path
+    elif(bonPos in [1,4]): # Checking if Bonnie is in a dead-end optional path
         bonOp = 2
     else:
-        bonOp = 0 #Bonnie is on the regular path
+        bonOp = 0 # Bonnie is on the regular path
 
-    if(chiPos in [1,3]): #Checking if Chica is in position to take optional path
+    if(chiPos in [1,3]): # Checking if Chica is in position to take optional path
         chiOp = 1
-    elif(chiPos in [2,4]): #Checking if Chica is in a dead-end optional path
+    elif(chiPos in [2,4]): # Checking if Chica is in a dead-end optional path
         chiOp = 2
     else:
-        chiOp = 0 #Chica is on a regular path
+        chiOp = 0 # Chica is on a regular path
 
-    [bonThreat, chiThreat] = threat(hour, bonStag, chiStag) #Bonnie and Chica's threat is generated.
+    [bonThreat, chiThreat] = threat(hour, bonStag, chiStag) # Bonnie and Chica's threat is generated.
 
 #VVVVVVVVVVVVVVV# Bonnie AI #VVVVVVVVVVVVVVV#
 
-    if(bonOp == 1): #Bonnie can now reset, stay, go into an optional dead-end path, or progress.
+    if(bonOp == 1): # Bonnie can now reset, stay, go into an optional dead-end path, or progress.
         if(bonThreat < 26):
             if(bonPos != 0):
                 if(bonPos > 2):# Bonnie can reset if past the Dining Hall
@@ -261,7 +297,7 @@ while hour < 6:
             print("Bonnie moves forward, skipping optional path")
             bonPos +=2
             bonStag = 0
-    elif(bonOp == 2):#Bonnie can now reset, stay, or get out of the optional dead-end path
+    elif(bonOp == 2):# Bonnie can now reset, stay, or get out of the optional dead-end path
         if(bonThreat < 26):
             if(bonPos != 0):
                 if(bonPos > 2):# Bonnie can reset if past the Dining Hall
@@ -275,7 +311,7 @@ while hour < 6:
         else:
             print("Bonnie stays still")
             bonStag += 1
-    elif(bonOp == 0):#Bonnie can now reset, stay, or progress
+    elif(bonOp == 0):# Bonnie can now reset, stay, or progress
         if(bonThreat < 34):
             if(bonPos != 0):
                 if(bonPos > 2):# Bonnie can reset if past the Dining Hall
@@ -290,7 +326,7 @@ while hour < 6:
             bonPos += 1
             bonStag = 0
 
-    if(bonPos == 8):
+    if(bonPos == 8): # Bonnie is at the door. If it is closed, he remains outside. If it is open, the player dies
         if(lDoor == True):
             bonPos = 7
         else:
@@ -298,7 +334,7 @@ while hour < 6:
 
 #VVVVVVVVVVVVVVV# Chica AI #VVVVVVVVVVVVVVV#
 
-    if(chiOp == 1): #Chica can now reset, stay, go into an optional dead-end path, or progress
+    if(chiOp == 1): # Chica can now reset, stay, go into an optional dead-end path, or progress
         if(chiThreat < 26):
             if(chiPos != 0):
                 if(chiPos > 2):# Chica can reset if past the Dining Hall
@@ -316,7 +352,7 @@ while hour < 6:
             print("Chica moves forward, skipping optional path")
             chiPos +=2
             chiStag = 0
-    elif(chiOp == 2):#Chica can now reset, stay, or get out of the optional dead-end path
+    elif(chiOp == 2):# Chica can now reset, stay, or get out of the optional dead-end path
         if(chiThreat < 26):
             if(chiPos != 0):
                 if(chiPos > 2):# Chica can reset if past the Dining Hall
@@ -330,7 +366,7 @@ while hour < 6:
         else:
             print("Chica stays still")
             chiStag += 1
-    elif(chiOp == 0):#Chica can now reset, stay, or progress
+    elif(chiOp == 0):# Chica can now reset, stay, or progress
         if(chiThreat < 34):
             if(chiPos != 0):
                 if(chiPos > 2):# Chica can reset if past the Dining Hall
@@ -345,30 +381,41 @@ while hour < 6:
             chiPos += 1
             chiStag = 0
 
-    if(chiPos == 8):
+    if(chiPos == 8): # Chica is at the door. If it is closed, she remains outside. If it is open, the player dies
         if(rDoor == True):
             chiPos = 7
         else:
             chica()
-############################################
+#VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV# Post player-action calculations
 
-    if(lDoor == True):
+    if(lDoor == True): # Doors drain power if closed
         power -= 2
     if(rDoor == True):
         power -= 2
 
-    print("Cam: " + str(cam))
-    if(cam != "1c"):
+    if(action != "c"): # Player didn't check cameras this turn, postponing the Golden Freddy trigger
+        preGold -= 10
+    if(preGold < 0):
+        preGold = 0
+
+    if(cam != "1c"): # If the player doesn't check camera 1c, Foxy's camera, Foxy's timer goes down. the timer goes down faster later in the night.
         if(hour == 0):
             foxTime -= 1
         else:
             foxTime -= hour
-    power -= 1 #Ambient power drain
-    minute += 1
-    action = None
+
+    power -= 1 # Ambient power drain
+    minute += 1 # Time passing
+    action = None # Resetting user input for the next turn
     cam = None
 
-    if(foxPos == 3):
+    if(preGold == 25):
+        goldToken = True
+
+    if(gold == 10):
+        gold()
+
+    if(foxPos == 3): # Foxy is at the door. If it is closed he remains outside and pounds on the door, draining power then resetting. If it is open, the player dies.
         if(lDoor == True):
             power -= 25
             print("You hear a loud slamming noise on the door to your left, then footsteps going down the hall")
@@ -377,25 +424,28 @@ while hour < 6:
         else:
             foxy()
 
-    if(foxToken == True):
+    if(foxToken == True): # Foxy approacing if his timer ends.
         foxPos += 1
 
-    print("++++++++++++++++++++")
     if(foxTime == 0): #Checking if Foxy is gone
         foxToken = True
-    print("Power: " + str(power))
-    print("Foxy Timer: " + str(foxTime))
-    print("Foxy Token: " + str(foxToken))
-    print("Foxy Position: " + str(foxPos))
-    print("Cam: " + str(cam))
-    print("Chica Threat : " + str(chiThreat))
-    print("Chica Op : " + str(chiOp))
+
+    print("++++++++++++++++++++")
+    print("Power            : " + str(power))
+    print("Foxy Timer       : " + str(foxTime))
+    print("Foxy Token       : " + str(foxToken))
+    print("Foxy Position    : " + str(foxPos))
+    print("Cam              : " + str(cam))
+    print("Chica Threat     : " + str(chiThreat))
+    print("Chica Op         : " + str(chiOp))
     print("Chica Stagnation : " + str(chiStag))
-    print("Chica Position : " + str(chiPos))
-    print("Bonnie Threat : " + str(bonThreat))
-    print("Bonnie Op : " + str(bonOp))
-    print("Bonnie Position : " + str(bonPos))
-    print("Bonnie stagnation : " + str(bonStag))
+    print("Chica Position   : " + str(chiPos))
+    print("Bonnie Threat    : " + str(bonThreat))
+    print("Bonnie Op        : " + str(bonOp))
+    print("Bonnie Position  : " + str(bonPos))
+    print("Bonnie stagnation: " + str(bonStag))
+    print("Pre-Gold         : " + str(preGold))
+    print("Gold Token       : " + str(goldToken))
     print("--------------------")
 
 
@@ -421,7 +471,7 @@ if (hour == 6):
 ⠀⠀⠀⠀⠀⠀⠌⣾⣿⣿⣿⣿⣿⣿⣿⣾⣬⣑⠠⢁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢤⣱⣾⡟⢧⣺⠞⠁⠀⠀⠀⠀⠠⠀
 ⠀⠀⠀⠀⠀⠀⣘⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣗⣤⢂⠄⡀⢀⠀⡀⢀⠀⡀⠀⣄⣢⣽⣿⣿⢳⡽⠊⠁⠀⠀⠀⠀⠀⠂⠀⠁
 ⠀⠀⠀⠀⠀⣐⣾⣿⡿⡙⣿⣿⢿⣫⠿⣿⣿⣿⣿⣿⣿⣷⣿⣼⣾⣵⣯⣾⣵⣿⣿⣿⣿⣿⠟⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                     YOU WIN""")
+                     YOU WIN""") # Player wins, game ends
 
 else:
     fredCool()

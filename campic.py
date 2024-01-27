@@ -1,4 +1,5 @@
 from core import clear
+import time
 
 def coveClosed():
     clear()
@@ -959,13 +960,6 @@ def rHallCloseC():
 def lLightB():
     clear()
     print(""".................                                                                                        . .. .....                                   
-.................                                                                                             ......                                  
-.................                                                                                             ...... ...                              
-.................                                                                                           ........ .......                          
-.................                                      ...                                                  .... .............                        
-..................                                    ..'....                                                ..  ................                     
-.................                                 ..  .'''...                                                  . ..................                   
-.................                                .....'''....                                                    ....................                 
 .................                                .....'''....                                                 .       .................               
 ................                                 ............                                                          ................               
 ................                                  .  .......                                                               ............               
@@ -1017,21 +1011,7 @@ def lLightB():
 ..'.lXNXNWMMMMMMWNo         ......                                                                                             ........    .......    
 ....cNWNWMMMMMMMMWd         .......                                                                                          ...........   .......    
 ....lNWWMMMMMMMMMMd.        ..........                                                                                      .............  .......    
-....lNMMMMMMMMMMMMd.        .................                                                                 ....  .  .... .............  .......    
-....lNMMMMMMMMMMMMd.        .................                                                                 ...   .  ..................  .. ....    
-....lNMMMMMMMMMMMWd         ...............                                                                   ....    ...................  .. ..      
-....cNWWMMMMMMMMMWd         ............                                                                      .....   ...................  .....      
-....cNWWMMMMMMMMMWo         ........                                                                           .... ......... ...........  ....       
-....cXNNWWMMMMMWWXl         .......                                                                                 ......... ...........   ...       
-....cXXKXWWWWWWWX0c         ....                                                                              ..  . .....................             
-....:OOkkkkkxddddc.          ...                                                                              .....  .......  ......                  
-....';',;:c:;,;oo.           .                                                                                .....    ...                            
-....,l''xocldklc;.           .                                                                                ....                      .....         
-....'l''xolkdl::;.                                                                                            ..                    ..';cc'.          
-....'ll:;;:;'....                                                                                                                ...,loodo,..         
-...............                                                                                                                    .,odddd,..         
-............                                                                                                                      ..,odddd,..         
- ..                                                                                                                                 ,odddo,    .      """)
+....lNMMMMMMMMMMMMd.        .................                                                                 ....  .  .... .............  .......    """)
 
 def rLightC():
     clear()
@@ -1085,13 +1065,274 @@ def rLightC():
    ........          ....                                              .                      ...          .....                .ckO000Okdkd. .       
    ........          .....               .                                                    ...                               .ckO0K0Okxkd. .       
    .....'.           .....  .       ......                                                    ..'.                              .ckO0K00kxOd. .       
-     .....          .....          .......                                                   ..'''.                             .:xkO00Okdkd. .       
-       ...           ....           ......                                                   ...''..                             :dxkOOkxdko. .       
-         .                           .....                                                   ..''''.                             ;odxxxxdoxo. .       
-      ....                             ...                                                   ........                            .,:loddoldl. .       
-   .. ....                                                                                   .........                           ...';;,;;c:. .       
-   ..                                                                                        ....  .......                       ...;;''.','.         
-    . ...                                                                                    ....       .......                   .',,,;;,,. ..       
-   .. .,.                                                                                    ..'.           .....                    .'..''. ..       
-    . ..                                                                                      ..'.                                       ...  .       
       .                                                                                       .....                                           .       """)
+
+def goldFlash():
+    clear()
+    print("""                                                                                                                                                                                    
+                                                                                                                                                                                    
+                                                                                                                                                                                    
+                                                                                               .                                                                                    
+                                                                                                                                                                                    
+                                                  .......                        ..           ....    .                                                                             
+                                               ..,,,''.''''..           .....                 ....                                                                                  
+                                              .''',;:::::,..''.        ...''............    ............... ...                                                                     
+                                             .,'':llccclol:'.,'       ..''....',''''........',,,,,',,,;;,,......                                                                    
+                                            .''.;loollclcc:,.,...   ...''..'',;::;,,,,,,'.',;::;;;;:::::;;;,''....                                                                  
+                                            .'.'clllccccc:;.',',...........',;;;:::::;;;;;;;;;;;::c:::::;::;;,,'...                                                                 
+                                            .''.;l::c::cc:,.''..  ..........',;,;;:cc:;;;::::::::ccc::::::::;;,,'......                                                             
+                                             .,'.,:::ccc:;.''.    ..............',,;::::;;;;::cc:;,'''''',;::;,,,'... ...                                                           
+                                              .,,..',,;,,.',.    ........         .';;:;;;;;;::;.............,;;;,'... ..                                                           
+                                                .........''.     ...... ......'''..,;,,,,,;;;;:;'.','''......',,;;,.......                                                          
+                                                    .....        .................','',,;;;;:::;,'..... ...',,,,,,'..  ..'.                                                         
+                                                                 .........           ..,,;;;;;'.           .,;;,,'...    ''                                                         
+                                                                 ...'.'.              .',,,,,.              .;:,,'...    .'.                                                        
+                                                                  ......               ',,,,'                ':;,.....   .. .                                                       
+                                                                   .....              .,;,,,..               ';''''...   ',                                                         
+                                                                  ......              .,;;,'..              .''..''....  .'.                                                        
+                                                                 ........                                  .,;'.,;,'...                                                             
+                                                               ...........     .....         ............ ..,,'',,'....                                                             
+                                                               ........   ...',,;;;;,'.......''',,,,,,,;;,'.....'''...                                                              
+                                                               ... ...  ...',;;:c:::cccc:'.';:ccccccclllol:'..........                                                              
+                                                                        .,,,,,,:lllc::cc:,.';cllllccccloolc;.........                                                               
+                                                                   .   .';;,,;;;:llcc:::;'..,:c:;;;:cccc;,;:,........                                                               
+                                                                       .';:;,,,,;;cc:cll:'...','.';clll:,',:,.......                                                                
+                                                                        .,,,,''',,;::clc;'....,,',;;::c:;;;:'...                                                                    
+                                                                  ..     ..'.....';:c:,.'....,:;;;;;::;;;;,........                                                                 
+                                                                 ...      ........',,,...   ..,,,''','''''.  ..'''..                                                                
+                                                                ....         ...  .....       .....  .....   .,,;,'.                                                                
+                                                                ....                                         ..';;,..                                                               
+                                                                .....                                        .',;,..                                                                
+                                                                 .....                                      .';;,'..                                                                
+                                                                 .........                                 .',;,'..                                                                 
+                                                                  ......''.                               ..',,,...                                                                 
+                                                                   .........                             ....'''..                                                                  
+                                                                    .........                           .''....'.                                                                   
+                                                                      .....'.                          ..........                                                                   
+                                                                      ..........                     .''....'...                                                                    
+                                                                      ....'''.',.  ....       .......''',,,'''..                                                                    
+                                                                       .....',,,,....,,,.......''''',,,,,,'''..                                                                     
+                                                                        .. .....''''',;;,''''',,,,'...........                                                                      
+                                                                         .....     ..........................                                                                       
+                                                                                 .......          .......                                                                           
+                                                                                                                                                                                    
+                                                                                                                                                                                    
+                                                                                                                                                                                    """)
+    time.sleep(0.0416)
+    clear()
+
+def goldSprite():
+    print("""                                                                                                                                                                                    
+                                                                                                                                                                                    
+                                                                                                                                                                                    
+                      
+
+
+
+
+                                                        .'''''''''''.                                                                                                               
+                                                        .coooooooool;.                                                                                                              
+                                                        .coooooooooll:;;;;;;;;;;:::::::;;;;;;;;;;;;.                                                                                
+                                                        .cooooooooooooooooooooooooooooooooooooooool;'........                                                                       
+                                                        .cooooolllloolooooloooooooooloolooooooooooollolooool:.                                                                      
+                                                        .cooooolooolc,'''''',;coooolllcccccccclooooooooooooo:.                                                                      
+                                                        .;:::::clool;. .;l;. .:oooool;..'''..'cllooooooooooo:.                                                                      
+                                                               'lool;. .lxl. .:oooool;.;xkx:..:oooooooollooo:.                                                                      
+                                                               'lool:........':oooool;..,;,...cllolooolllloo:.                                                                      
+                                                               'looolcccc::::cclllllc:;;;::::clololc::::::::,.                                                                      
+                                                               'looooooc,..............':oooooooool,.                                                                               
+                                                               'looooooc.              .:oolloooool'                                                                                
+                                                               'looooooc.              .:oooloooool'                                                                                
+                                                               'looooooc.              .:looooooool,                                                                                
+                                                               'looooloc.              .:looooloollc:::::::::;.                                                                     
+                                                               .;;:loooc.              .:looooooooloooooooolol:'                                                                    
+                                                                  .;looc'...............:looolooloooooooooooolo:.                                                                   
+                                                                  .;ooollccccccccccccccllollloooloooooooooooooo:.                                                                   
+                                                                  .;loooooooooooooooooooolooloooooooooooooooooo:.                                                                   
+                                                                  .;loooooooooooooooooooollloooloooooooooooooooc;'''.                                                               
+                                                                  .;oooooooooooooooollooooloooooooollooooooooooooool.                                                               
+                                                                  .;oooooooooooooooooooooolooooooooloooooooooooooooc.           ........                                            
+                                                                  .;oooooooooooooooooooooolooooooooooooooooooooooool,...........;llllll;                                            
+                                              ';::::::::;.        .;oooooolloooooooooooooollooooloooooooooooooooooollcccccccccccllollol;                                            
+                                              ;oooooooooc'        .:loooooooooooooooooooooooooooooooooooooooooollllloloooooooollloolloo;                                            
+                                              ;ooooooooolc:::::::::loooooooooooooooolooooooooooooooooooooooooooc'.'cooooooooooooolloool;                                            
+                                              ;ooooooooolooooooooooooooooooooooooooooooooooooooooooooooooollooo:. .:oooooooooooooooolcc,                                            
+                                              ;oooloooooooooooooooooooooooooooooooooooooooooooooooolooooolloooo:. .:ooooooollllllolo:..                                             
+                                              ;looooooooooooooooooooooooooooooooooooolooooooooooooolooooooolool;.  .''''''''''''''''.                                               
+                                              ;oooooooooooooooooooooooooooc;;;;;;;;:loooooooooooolloooooooll:,.                                                                     
+                                              ,cccccccccc:::::::::::::::::'        'cllllllllllllllllllllll:.                                                                       
+                                               .........                           ..''''''''''''''''''''''.                                                                        
+                                                                                                                                                                                    
+                                                                                                                                                                                    
+                                                                                                                                                                                    
+                      
+                                                                                                                                                                                    """)
+
+def goldFull():
+    print(""" .';cloddxkO00KKKXXKKOx;...             'OXXX0xxxk00xokkdk0kxOKXKxoc:coxO0OxoxOOO0KK0Ok0O0XKXNNXXXX0OdokKXNNK0XXKXNNNXNXK000K0O000XNXXXNXXXXK0kl;.        ,kK:   ,ok00000OOkxdool:;,
+  .,;clodxkOO000KKKK0kl.'c'             ;0XXXKOkkOko:::,.''...,;;,''.',:xOOOxxOKKKKK0kxxdxOkk0XXXXKKKOk0XKKX0xkxdoolc::;,'',,',;;cdk0XNNXXXKOxdl;.         cKk'  .:dkO0OOOkkdoolc;,'
+  ..,;:codxxkOO00000Od,,xd.            .lKXXXXK0d;.                     ...,:loxOKKK0OOOdolcck00OkKXXX0kdlc;'..                     .cOXXXXK0Oxo;.         .c0d.  .:dxkkkxxddlc:;,'.
+    ..';cloddxkkOOkxd;,xKd.            'xXXXK0Oo'                               .oKXXXXK0OOxxO00O0KXO:.                               oNNNXKK00Oo'          .cOo.  .:odddooolc;,..  
+      ..',;clloodddl;'o00l.           .cKXXKkdo;.                               ,xKXXXXXKKKKXXXKKXXXk,                               .xNNXXXXXXKkl'.          ;kc   .,::ccc:;,..    
+d:.       ...'','''..cKO:.          ..'xXX0o:c:;'                            ..l0XKKXXXK00KXXNXXXXXKK0o,.                            :KXXK0KXKKKK0Oo,.        .dO,    .......     ..
+NX0d:..            .;kKl.             ;OXKkl;'...                    .....',;cdk0K0kkOO000KKXXXXXXXXXXXKko:...  ....   ..           .xXX0OOkKXXXXNX0o;.        ;Okc.            .';c
+XXXX0dc;,..    .'cok00o.         . ..;kKKOko:'..                          ..';cclddodkkOxoodOXXXXXXXXXK0kol;.          ......'..   'dKXK0kkxOXNNXXXKOxc.        :OX0xl,.   ..''';ok0
+OKXX0kOO00koc;:d0KX0d;.           .'ck0OkOdol,..                              ..,:colldkkxdxO00KXXXXKOdoc;'.                ..',;;:oO0KX0xdkOKXXXXXXKOd:'.       'd0XXKkoodkO0OkdkKX
+cx0KOOKKKXX0kc:llll;.            .'ckOkooddc'....                               ..;llldxkOOkxxx0K00Oxl;.                       .,ldddOKNXOxk0KKKKKXXX0xo:'.        ';cc::d0KXXKK0OKK
+ .,;:::;:c:;,..                  .oOKKOxdccc,....                                  .',;clododddxkkdl;.                           .cxk0XXKK0KK000OkOOkOOOd:'             ..';:;;;:::;
+                                .cOKXK00koloc,.                                      ..';clooddool;.                              .cdxkkxxxddxOdloxkxxxkxl'                         
+                               .cO0KKXXKKkol:'..                                      .,,;:clol:;'.                                 .;::,,lolddclooxxdolol,                         
+                               :OKXXKKOkxdc:,'..                                       .'''':cc:;'                                   .:lc;;ldooodocdkddlcc;.                        
+                              ,k0KK0OOd;,,'....                                         .';;c:;'..                                   .:oolccllcccloodddoc:,.                        
+                             'dKK0Odooc;....                                            .';:cc;.                                      ,oxdc,,:loodxooxkdc:,.                        
+                            .ckOkoll:c:;,'....                                          ':cc:,..                                      .lkkl:;;okxk00Okxoc,..                        
+                           .'coo:,,cool:;,;,'...                                       .;ccc,..                                       .:llloddk0KKKKKOxo:,..                        
+                           ..';:;;;codkxocc:'',..                                       .....                                         ;dkxdd00OOKXXXKKOdc:'.                        
+                          .,..,;,,;:::ldOOxc'.,;'.                                                                                   .dKX0kxkKKKKXXXKkxxl;,,.                       
+                        .,:::,cdllodoodxkOkc,.',,.                                                                                  .:kXXK0OOOOOKKKX0dlddc::,..                     
+                       'clldxdoxkOK0OO000Oo:;,,,''.                                                                                .cOKXXKOxxkOkOK0kkkxxxocoo;'..                   
+                    ..,ldxxddkOOOO00kkk00Oxdxolc;,,.                                                                              .ckKXXXXK00KKKKOkxxOOkxxocooc;,..                 
+                  .',;lddk0kkKKKXXXXKKO0X0kOxdoc,',.                                                                              .;oOXXXKKKKK0000xx00kxxkkooxo:;,'.                
+                 .;ccooldkkOKK000OOO0K00KOkko:'.........                                      'oxkkxdo:.                     ..''...';coxxkOOkkkkxdxOOO000OkkOxol:'.                
+                 'cloolcdkkkOOxxddO00KOxkd:,'.',:lclc;cc,''......                             .,;,''..             ......';;;cxkxddolc:::::looodoodk000KKX0Okk0Okl,..               
+                 ;loxo::okdoxkOOOkO0KK0o;'.,cdkO0Ooxkdkkddddollccc::::clllc;,..                           ....'',,;;cllodxxxkO0K00Okxkxddoc:;;;:ddldOKXK0KK0xdoxOOo,.               
+                .:lddcc:okxdkK00XKKKKk:,;lxkO0KXX0k00kO00XXK00OOOOOO00KXKXXK00Oxdolc;'...    ......,c::cldkxdoloxooddk00KXK00KXXOkk0K0KKOkxxdl:,;lxkkOKK0O00OxlclxOd,.              
+                .:cllcooxxkO0XKKXXXOl;:oO0KXXKKXXKKXXKKXXXXXXXXKKXXXXXXXNNXXXXNNNNNXXKK0OkkxxkOOkkkOKKKKKXXXKK0KK0000KXXKKXXK0XXXKKXXNXXXXK0Okxd:':x00KKK0kdxOOxodkko;.             
+                .,coxxxkOOKXXXXXXOo:cO0KNNKxdONNXXX0xdkXNNNNNNNNNNNNNNNNNNNNNNWWNWWNXXXNNNNNNXXXXK0KXXXNNNNNNNNNNNNNNNXXXKXNXKXXOdkKNNNNN0dx0K0Oko:lOKX0OOOxoldxkkdll:.             
+                .,lddxxxkOKXK0XX0o:d0XNNNNo..oXNNNKl. cKNNNWWWWWWNNWWWWNNWWWWWWWWWWWNNXXXNWNXXXXNXXXNNNNNNNNNNNNNNNNNNNXXNNNNXXXl..xWNWWWO,.oKX0O0OllOXKkO0Okxlldkko:;.             
+                .',,,:ldkOxk0O0Oocd0NNWWNNKk0XNNNNN0xkKNNNWWWNNNNNNNNWWWWWWWWWWWWWWWWWWWNNWNXKKXNNNNNNNXXNWWWWWWWWWWWWWWNNNXNNNNX0OXWWWWWNX0KXXK0KX0ooO0xk00Okolloxo:'.             
+                 ..  .:oxOOooxd:,l0NNXKNWNWNNNNNNWWWWWWNNNNNNNNNNNNNNNNNWWWWWWWWWWWWWWWWWWWWNK0XNNWWNXNNNWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWNNNNX0k0XKOolOKK0kd::ccol;'.              
+                     .;lxOkodkl':ONWNK0XNNNNOdkXWWWWWWNNNNNNNXNNNNNNNNNNWWWWWWWWWWWWWWWWWWWWXKKKKXXNNNNWWWWWWWWMMMMMMMMMWWWWWWWWWWWWWWWNOd0NWNNX0kOO0kldk0Kkc;;lllc..               
+                     .lxdoddooc;dKXNXK0KXKXO' .xNNWWWNNNNNXXXXXNNNNNNNNNWWWWWWWWWWWWMMWWWWWWNX0O0XNNNNWWWWWWWWWWWMMMMMMMWWWWWWWWWWWWWWW0' ,0WWNNNKOkOOdclx0Oo;:lol,.                
+                     .,:::cc::,,dOO0OOO0K0KKxld0XXNNNNNNNXXXXXXXXNNNNNNNNNNNWWWWWWWWWWWWWWWNXKXXXXNNNNNWNWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWNkoONWWNNNNX0OOd:ccldo;;;;,.                 
+                       .,;,.''..:odkkxdk00KNNNNNNNNNNNNNXXXXXXXXXXXNNNNNNNNNNWWWWWWWWWWWWWNNXKXXXXNNNNNNNNNNNWWWWWWWWWWWWWWWWWWWWWWWWWWNWWWWWWWNNNNXXKo,,..',,,'..                  
+                         .      .,:oxkxdkOOOKKXNNXXXXXXXXXXXXXXXXXXNNNNNNNNNNNWWWWWWWWWWWNNNXKXXXNNNNNNNNNNNNWWWWWWWWWWWWWWWWWWWNNNNNNNNNNNNNWWNNNNXKk:..    ..                     
+                                 ..:coddxkOkkOO0KKXXXXXXXXKKKKXXXXXNXXNNNNNNNNNNWWWWWWWWNNNNNXXXXXNNNNNNNNNNNNNNWWWWWWWWWWWWWNNNNNNNNNNNNNNNNNNNNNX0kl.                             
+                                  ..,:olcoxkk0000OOOO000KKKK00XXXXXXXXXXXNNNNNNNNNNNNNNNNNNNXXXXXXXXXXXXXNNNNNNNNNNNWWWNNNNNNNNNNNXXXXXXXXXXNNNXXXOdl,.  .                          
+                                   ..':lccoodkkO00OkkkOOOO000OOKXXXXXXXXXXXXXNNNNNNNNNNNNNNNXXXXXXXXXXXXXXXNNNNNNNNNNNNNNNNNNNNXXXXXXXXXXXXXXXXK0kdl,.                              
+                                    ...,,;cc:codddxkkxxxkOOOOOOO000KKK0KKKXXXXXXXNNNNNNNNNNXXKKXXXXXXXXXXXXXXXNXNNNNNNNNNNXXXXXXXXXXXXXKKXXX0kxdllc.                                
+                                      ...',;,,;;ccccloollodxxddddxddxkkkO0KKKKKXXXXXNNNNXXXX0OO0KXKKXKKXXXXXXXXXXNNNXXXXXXKKKKXXXXXXKXKOk00xlccll,.                                 
+                                 ...     .'..''...'''''',;;;;:;;:ccclodxkkOOO00000KKXXXXXXXXOxk00O0KXKKKKXKXXXKXXXKK0OOkxkkOOkxOXKkddxxxxxocll:;.  ',.                              
+                                 ...       ....           .......'.';:ccodxxxddddxkkkO00KKX0oclddoxOOkxxkkxxxdddxxxoooddddoodolldollllcc::;,,,.   .,;.                              
+                                 ..                              ....''',,;:;;;:ccloddddxxxo,.';;;;;:;,;;,,'''.....'''''...........'''.......   .';:c,.                             
+                                 ..                                            ............                                                     ..,cl;.                             
+                                 ''.                                                                                                            .';:cc'                             
+                                 ...                                                                                                           ..;ooll;.                            
+                                 ..                                                                                                           ..',:oxxc.                            
+                                 .                                                                                                             .';::col.                            """)
+
+def goldLimp():
+    print("""                                                                                         ....                                                                                       
+                                                                                     ..'''''','.                                                                                    
+                                                                                   .',..     .';'                                                                                   
+                                                                   .               ',         ..'.                                                                                  
+                                                                 .::.              ..  .....   ..                                                                                   
+                                                                .......            ..  .....   .                                                                                    
+                                                             ..     ..;:,..''. ..''..                                                                                               
+                                                           .'.       .'cllll::odxOOo;.                                                                                              
+                                                           ....        ...;lodxdddxOOd;.                                                                                            
+                                                               ....     .;loc::;;;',cooc;'...  .;cc:;'.                                                                             
+                                                                .....  'loc;,'...    ......,:::dOOOOkdc,..                                                                          
+                                                                  ....cxkxdc,...            .;dOOOkxdo:'...                                                                         
+                                                                  ..;dxdddooc;'.            .,okOOxl;'.                                                                             
+                                                                   ;dxdoododdo;.        .,:codxO00ko.                                                                               
+                                                                  .lddddlc:,;,.        .lkOOxxdloddo:. .'..                                                                         
+                                                                  'odooc.              ;xkxo:,'......    .','.                                                                      
+                                                                  'ccc;.              .;:;,..              .;l:.                                                                    
+                                                           .....  .;lo;.              ';'....               .oOx:.                                                                  
+                                                         .,..      .,lc,          .....,,....                'oOx;                                                                  
+                                                        .,.   ...    ':;.       .,;,.........             ....'oko'                                                                 
+                                                        ..    ....    .,;.    .,cc;'....                    ...,cc,.                                                                
+                                                        ..              ..'',;:cl:'....                     .....                                                                   
+                                                                ...      .'coolc:;....                       ...                                                                    
+                                                             ...      .,;,';looc;''..                       ....  ;l;.                                                              
+                                                                     'oxdl,.';;,'....                      ...   ;xkxl'                                                             
+                                                                 ','':xOdc.. ...     .                   .....  .cllodlcll:.                                                        
+                                                               .lxdl:;;ldc'.                             .         ..cOOOkxl,                                                       
+                                                              .lOkdl;. .',,..   ..       .......       ..            .;clllol,                                                      
+                                                              ,xOOxl,.    ... ......        .',,........  ..            .';clc.                                                     
+                                                             .ckOkdc,.        .''...          .......    ...               .,:,.                                                    
+                                                             .oOkxl;'..       .''....                                        .'.                                                    
+                                                             .okxdc;'...      .''..'.                                          .                                                    
+                                                             .lxdol::'.      ..''...                                                                                                
+                                                             .:dxdlc;'..     ..'..'.                                                                                                
+                                                              ,oddo:;'..     ...';:,...                ....                                                                         
+                                                              .cddl:,...    ....'...                      ...                                                                       
+                                                               ,ool:,..     .''..                          ...                                                                      
+                                                               '::::'.     .,'...                                             ':'                                                   
+                                                             .cddc;'.   . .coc,'..                 ......    .'.             .ckxc.                                                 
+                                                           .:dkxo:'.    ..cxxdl:,.               .,clc:,.     ;l,    ...     .lxkko,.                                               
+                                                          'okkdo:'.      'oxkdoc;.               .:odlc;.    .cdl.   .       .:loddd:.                                              
+                                                         'xOkdl;..       'oxkxdl;.                 .;ll;.    ,dxo;.           ..'',:l;.                                             
+                                                        .dOOkdl,..       'okOkdc;.                  ..,;.   .okxoc.       ....     ':c'                                             
+                                                       .cOOkdl;'..       ;xOOkd:,.                 .. .;'   :xxxxl'     .,,'..      .;,.                                            
+                                                       .oOkdo:'..       .ckOkdl;..                 .  .'.  .;cclol;.   .,;;,'..       .                                             
+                                                       .:oooc,..        .lkkxdl;..            .               ...''.    ',,;;'...                                                   
+                                                         .,;'.          .oxxdoc;'..          ...                         .''''...                                                   
+                                                     .'...,,..          .ldxdl;...           .,.                           ..... ..   ':,..                                         
+                                  .',.     .;cc;,,'';oxo;','..          .;ll;.              ..'..                                     ckkxd:.                                       
+                               ,:.,kKk,   .;cooccolloxOOo:,.              ',..              .....        ..',;;,..                   'd0OOOx:.                                      
+                              ,kl...''.   ...;::;,;;..:oc'.            ........            ...     ..,:cloxxxxxxxolc;,..         .;ccokOOO0Oxdo:;;,.                                
+                              .:,      ......,....,.  .:;.     ....,coc'.';;;,.  .;;,,'. ...... ..;ldddddddl:codddddkkkxl;'...   .'''';:lolloxkookkl.                               
+                               ..           .,.  ...  .;,.  .:ldxxkxxxdlcodxdoc'.:oxkkkxc;;:,.. .,dxxkkkkxo;..;codkkkkOOOOOkOkxl:,'. .'....,:cl:'...                                
+                                             ...  ...  ',..:dddxxdolldddddxxdc,,cdxO000Oxol:'.   .;dOO0OOOxl,..'lxO00OkxoclxOO00ko:.  .'. .,,..                                     
+                                                        ..:do:;;::;;ldoc:;::;'.'ldoooodooll:'.    'dkkxooolc;.  .,clloooc..':ccccc;. .'.. .',.                                      
+                                                        .:ddl;'....:ddl:,....',,coc,'',,;cll:.  .';cooc;,''''......''',,;,. ...',;:;.     ...                                       
+                                                        .:ll:,... .;oolc;,'.....:lc:;;;;,;;,.    .,cllc:;,......,;,,'.......',,'.''..                                               
+                                                                      ...        ...                ....                                                                            """)
+
+def goldStare():
+    print("""
+                                                                             .....
+                                                                            .lxd;.
+                                                                             ,cc'.
+                                                                             .,;,..
+                                                                             .;lc,.
+                                                                             .:ddc'.
+                                                                             .:xxl,.
+                                                                             .co:'..     ...
+                                                                          .;cc;'.
+                                                          ...            .'''...                ..
+                                                             ...         ........           ....''''...
+                                                                       ..........        ...........'''...
+                                                                      .......                      .........
+                                                                     .....                            ........
+                                                                      ..                               .......
+                                                                      ..                ....             .....
+                                                                     ...              .......                .
+                                                                    ....                  .                  ..
+                                                                   .....                                      .
+                                                                 ......
+                                                                .......
+                                                                ......
+                                                               .......                   ...
+                                                             ...''''....                ....
+                                                            ....''''''''',,;;;;..                .;::::;'..
+                                                            ...''',,,;;;;:cllllc;..           ..;codddool:;'.....
+                                                            ..''',;;;;;;,;clllllcc;,.       .';:cllllllc:::;,'..
+                                                            ....',;;;,,,'',;;,,,,''..       ...'',;;;;;,',,'....
+                                                             ....',,'.......                      .............
+                                                               .........
+                                                                 .....
+
+
+                                                                  ..
+                                                                ......   .
+                                                            ..','........                                      .,;,'..
+                                                         ..',,,'........                                       .,;;;,'..
+                                                      ....,,,''.......                                         ..,,,,,'.....
+                                                  ...',;;,''...                                                ........';::;'..
+                                                ..',,,;;;,..                                                         ..,;:::;,'..
+                                               .',,,,,,,''.                                                           .'',,,,,,''.
+                                              .,,,,,,,'''..         ....                                              .....',,,,''.
+                                             .',,,'''.......       .......                                             ......''''...
+                                            .','''..........       .....'.                                              .............
+                                            .'''...........        .......                                                 ...........
+                                           ..'........             .......                                                    ........
+                                           ........               ....'','...                                                   .......
+                                           .......                ...',,,,''....                                                   ....
+                                           ......                 ..',;;;,,'.......                                                  ..
+                                          ......                  .',;;;,,''.......
+                                          .....                  ..,;;;,,''........
+                                           ...                   .',;;;,''........
+                                           ..                    .';;;,''........                                                                                                   """)
