@@ -29,7 +29,7 @@ foxToken = False
 
 preGold = 0
 goldToken = False
-gold = 0
+postGold = 0
 
 count = 0
 action = None
@@ -106,7 +106,7 @@ while hour < 6:
         if(goldToken == True):
             if(rareRoll(9) == 9):
                 campic.goldFlash()
-                gold += 1
+                postGold += 1
 
     if(action == "c"): #User is checking a camera
         preGold += 1 # If the player does nothing but check cameras they will eventually encounter Golden Freddy
@@ -412,7 +412,7 @@ while hour < 6:
     if(preGold == 25):
         goldToken = True
 
-    if(gold == 10):
+    if(postGold == 10):
         gold()
 
     if(foxPos == 3): # Foxy is at the door. If it is closed he remains outside and pounds on the door, draining power then resetting. If it is open, the player dies.
@@ -446,6 +446,7 @@ while hour < 6:
     print("Bonnie stagnation: " + str(bonStag))
     print("Pre-Gold         : " + str(preGold))
     print("Gold Token       : " + str(goldToken))
+    print("Post-Gold        : " + str(postGold))
     print("--------------------")
 
 
