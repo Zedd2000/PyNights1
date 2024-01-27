@@ -29,7 +29,7 @@ foxToken = False
 
 preGold = 0
 goldToken = False
-gold = 0
+postGold = 0
 
 count = 0
 action = None
@@ -97,7 +97,7 @@ while hour < 6:
     else:
         print("Time : " + str(hour) + ":" + str(minute%60))
     print("Power : " + str(power))
-    while(not action in ["c","ll","ld","rl","rd","n","ftest","btest","ctest","die","tcheck","gtest","win"]): #error correcting list of possible actions
+    while(not action in ["c","ll","ld","rl","rd","n","m","ftest","btest","ctest","die","tcheck","gtest","win"]): #error correcting list of possible actions
         print("#####################################################################################################################################################")
         print("# c : Check cameras | ll : Toggle left light | ld : Toggle left door | rl : Toggle right light | rd : Toggle Right Door | n : Do nothing, pass time #")
         print("#####################################################################################################################################################")
@@ -106,12 +106,13 @@ while hour < 6:
         if(goldToken == True):
             if(rareRoll(9) == 9):
                 campic.goldFlash()
-                gold += 1
+                postGold += 1
 
     if(action == "c"): #User is checking a camera
         preGold += 1 # If the player does nothing but check cameras they will eventually encounter Golden Freddy
         power -= 1
         while(not cam in ["1a","1b","1c","2a","2b","3","4a","4b","5","6","7"]): # Error correcting list of possible cameras
+            campic.map()
             print("""1a  : Stage
 1b  : Dining Hall
 1c  : Pirate's Cove
@@ -412,22 +413,23 @@ while hour < 6:
     if(preGold == 25):
         goldToken = True
 
-    if(gold == 10):
+    if(postGold == 10):
         gold()
 
-    if(foxPos == 3): # Foxy is at the door. If it is closed he remains outside and pounds on the door, draining power then resetting. If it is open, the player dies.
+    if(foxPos > 2): # Foxy is at the door. If it is closed he remains outside and pounds on the door, draining power then resetting. If it is open, the player dies.
         if(lDoor == True):
             power -= 25
             print("You hear a loud slamming noise on the door to your left, then footsteps going down the hall")
             foxToken = False
             foxTime = 50
+            foxPos = 0
         else:
             foxy()
 
     if(foxToken == True): # Foxy approacing if his timer ends.
         foxPos += 1
 
-    if(foxTime == 0): #Checking if Foxy is gone
+    if(foxTime <= 0): #Checking if Foxy is gone
         foxToken = True
 
 #    print("++++++++++++++++++++")
@@ -446,6 +448,7 @@ while hour < 6:
 #    print("Bonnie stagnation: " + str(bonStag))
 #    print("Pre-Gold         : " + str(preGold))
 #    print("Gold Token       : " + str(goldToken))
+#    print("Post-Gold        : " + str(postGold))
 #    print("--------------------")
 
 
