@@ -7,8 +7,6 @@ import campic
 import foxRun
 from scares import foxy, bonnie, chica, fredCool
 
-#TODO add movement timers to make animatronics stay in place for at least 2 turns
-
 minute = 1
 hour = 0
 power = 1000
@@ -17,11 +15,13 @@ bonPos = 0
 bonThreat = 0
 bonStag = 0
 bonOp = 0
+bonPause = 0
 
 chiPos = 0
 chiThreat = 0
 chiStag = 0
 chiOp = 0
+chiPause = 0
 
 foxPos = 0
 foxTime = 100
@@ -232,7 +232,7 @@ while hour < 6:
             print("Left door closed")
 
     elif(action == "rl"): # Right light check
-        if(chiPos == 7):
+        if(chiPos == 6):
             campic.rLightC()
             print("Chica is at the door.")
         else:
@@ -240,7 +240,7 @@ while hour < 6:
         power -= 1
 
     elif(action == "ll"): # Left light check
-        if(bonPos == 7):
+        if(bonPos == 6):
             campic.lLightB()
             print("Bonnie is at the door.")
         else:
@@ -286,113 +286,134 @@ while hour < 6:
 
 #VVVVVVVVVVVVVVV# Bonnie AI #VVVVVVVVVVVVVVV#
 
-    if(bonOp == 1): # Bonnie can now reset, stay, go into an optional dead-end path, or progress.
-        if(bonThreat < 26):
-            if(bonPos != 0):
-                if(bonPos > 2):# Bonnie can reset if past the Dining Hall
-                    bonPos = 0
-                    bonStag = 1
-            print("Bonnie Reset")
-        elif(25 < bonThreat < 51):
-#            print("Bonnie stays still")
-            bonStag += 1
-        elif(50 < bonThreat < 76):
-#            print("Bonnie moves into optional")
-            bonPos += 1
-            bonStag = 0
-        else:
-#            print("Bonnie moves forward, skipping optional path")
-            bonPos +=2
-            bonStag = 0
-    elif(bonOp == 2):# Bonnie can now reset, stay, or get out of the optional dead-end path
-        if(bonThreat < 26):
-            if(bonPos != 0):
-                if(bonPos > 2):# Bonnie can reset if past the Dining Hall
-                    bonPos = 0
-                    bonStag = 1
-#                    print("Bonnie Reset")
-        elif(bonThreat < 76):
-            bonPos -= 1
-            bonStag = 0
-#            print("Bonnie exits dead-end")
-        else:
-#            print("Bonnie stays still")
-            bonStag += 1
-    elif(bonOp == 0):# Bonnie can now reset, stay, or progress
-        if(bonThreat < 34):
-            if(bonPos != 0):
-                if(bonPos > 2):# Bonnie can reset if past the Dining Hall
-                    bonPos = 0
-                    bonStag = 1
-#                    print("Bonnie Reset")
-        elif(bonThreat < 67):
-            bonStag += 1
-#            print("Bonnie stays still")
-        else:
-#            print("Bonnie progresses")
-            bonPos += 1
-            bonStag = 0
+    if(bonPause >= 2):
+        if(bonOp == 1): # Bonnie can now reset, stay, go into an optional dead-end path, or progress.
+            if(bonThreat < 26):
+                if(bonPos != 0):
+                    if(bonPos > 2):# Bonnie can reset if past the Dining Hall
+                        bonPos = 0
+                        bonPause = 0
+                        bonStag = 1
+#                        print("Bonnie Reset")
+            elif(25 < bonThreat < 51):
+#                print("Bonnie stays still")
+                bonStag += 1
+            elif(50 < bonThreat < 76):
+#                print("Bonnie moves into optional")
+                bonPos += 1
+                bonStag = 0
+                bonPause = 0
+            else:
+#                print("Bonnie moves forward, skipping optional path")
+                bonPos +=2
+                bonStag = 0
+                bonPause = 0
+        elif(bonOp == 2):# Bonnie can now reset, stay, or get out of the optional dead-end path
+            if(bonThreat < 26):
+                if(bonPos != 0):
+                    if(bonPos > 2):# Bonnie can reset if past the Dining Hall
+                        bonPos = 0
+                        bonPause = 0
+                        bonStag = 1
+#                        print("Bonnie Reset")
+            elif(bonThreat < 76):
+                bonPos -= 1
+                bonStag = 0
+                bonPause = 0
+#                print("Bonnie exits dead-end")
+            else:
+#                print("Bonnie stays still")
+                bonStag += 1
+        elif(bonOp == 0):# Bonnie can now reset, stay, or progress
+            if(bonThreat < 34):
+                if(bonPos != 0):
+                    if(bonPos > 2):# Bonnie can reset if past the Dining Hall
+                        bonPos = 0
+                        bonStag = 1
+                        bonPause = 0
+#                        print("Bonnie Reset")
+            elif(bonThreat < 67):
+                bonStag += 1
+#                print("Bonnie stays still")
+            else:
+#                print("Bonnie progresses")
+                bonPos += 1
+                bonStag = 0
+                bonPause = 0
+    else:
+        bonPause += 1
 
-    if(bonPos == 8): # Bonnie is at the door. If it is closed, he remains outside. If it is open, the player dies
+
+    if(bonPos == 7): # Bonnie is at the door. If it is closed, he remains outside. If it is open, the player dies
         if(lDoor == True):
-            bonPos = 7
+            bonPos = 6
         else:
             bonnie()
 
 #VVVVVVVVVVVVVVV# Chica AI #VVVVVVVVVVVVVVV#
 
-    if(chiOp == 1): # Chica can now reset, stay, go into an optional dead-end path, or progress
-        if(chiThreat < 26):
-            if(chiPos != 0):
-                if(chiPos > 2):# Chica can reset if past the Dining Hall
-                    chiPos = 0
-                    chiStag = 1
-#                    print("Chica Reset")
-        elif(25 < chiThreat < 51):
-#            print("Chica stays still")
-            chiStag += 1
-        elif(50 < chiThreat < 76):
-#            print("Chica moves into optional")
-            chiPos += 1
-            chiStag = 0
-        else:
-#            print("Chica moves forward, skipping optional path")
-            chiPos +=2
-            chiStag = 0
-    elif(chiOp == 2):# Chica can now reset, stay, or get out of the optional dead-end path
-        if(chiThreat < 26):
-            if(chiPos != 0):
-                if(chiPos > 2):# Chica can reset if past the Dining Hall
-                    chiPos = 0
-                    chiStag = 1
-#                    print("Chica Reset")
-        elif(chiThreat < 76):
-            chiPos -= 1
-            chiStag = 0
-#            print("Chica exits dead-end")
-        else:
-            print("Chica stays still")
-#            chiStag += 1
-    elif(chiOp == 0):# Chica can now reset, stay, or progress
-        if(chiThreat < 34):
-            if(chiPos != 0):
-                if(chiPos > 2):# Chica can reset if past the Dining Hall
-                    chiPos = 0
-                    chiStag = 1
-#                    print("Chica Reset")
-        elif(chiThreat < 67):
-            chiStag += 1
-#            print("Chica stays still")
-        else:
-#            print("Chica moves forward")
-            chiPos += 1
-            chiStag = 0
+    if(chiPause >= 2):
+        if(chiOp == 1): # Chica can now reset, stay, go into an optional dead-end path, or progress
+            if(chiThreat < 26):
+                if(chiPos != 0):
+                    if(chiPos > 2):# Chica can reset if past the Dining Hall
+                        chiPos = 0
+                        chiStag = 1
+                        chiPause = 0
+#                        print("Chica Reset")
+            elif(25 < chiThreat < 51):
+#                print("Chica stays still")
+                chiStag += 1
+            elif(50 < chiThreat < 76):
+#                print("Chica moves into optional")
+                chiPos += 1
+                chiStag = 0
+                chiPause = 0
+            else:
+#                print("Chica moves forward, skipping optional path")
+                chiPos +=2
+                chiStag = 0
+                chiPause = 0
+        elif(chiOp == 2):# Chica can now reset, stay, or get out of the optional dead-end path
+            if(chiThreat < 26):
+                if(chiPos != 0):
+                    if(chiPos > 2):# Chica can reset if past the Dining Hall
+                        chiPos = 0
+                        chiPause = 0
+                        chiStag = 1
+#                        print("Chica Reset")
+            elif(chiThreat < 76):
+                chiPos -= 1
+                chiStag = 0
+                chiPause = 0
+#                print("Chica exits dead-end")
+            else:
+#                print("Chica stays still")
+                chiStag += 1
+        elif(chiOp == 0):# Chica can now reset, stay, or progress
+            if(chiThreat < 34):
+                if(chiPos != 0):
+                    if(chiPos > 2):# Chica can reset if past the Dining Hall
+                        chiPos = 0
+                        chiPause = 0
+                        chiStag = 1
+#                        print("Chica Reset")
+            elif(chiThreat < 67):
+                chiStag += 1
+#                print("Chica stays still")
+            else:
+#                print("Chica moves forward")
+                chiPos += 1
+                chiStag = 0
+                chiPause = 0
+    else:
+        chiPause += 1
 
-    if(chiPos == 8): # Chica is at the door. If it is closed, she remains outside. If it is open, the player dies
-        if(rDoor == True):
-            chiPos = 7
-        else:
-            chica()
+        if(chiPos == 7): # Chica is at the door. If it is closed, she remains outside. If it is open, the player dies
+            if(rDoor == True):
+                chiPos = 6
+            else:
+                chica()
 #VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV# Post player-action calculations
 
     if(lDoor == True): # Doors drain power if closed
@@ -448,10 +469,12 @@ while hour < 6:
 #    print("Chica Op         : " + str(chiOp))
 #    print("Chica Stagnation : " + str(chiStag))
 #    print("Chica Position   : " + str(chiPos))
+#    print("Chica Pause      : " + str(chiPause))
 #    print("Bonnie Threat    : " + str(bonThreat))
 #    print("Bonnie Op        : " + str(bonOp))
 #    print("Bonnie Position  : " + str(bonPos))
 #    print("Bonnie stagnation: " + str(bonStag))
+#    print("Bonnie Pause     :" + str(bonPause))
 #    print("Pre-Gold         : " + str(preGold))
 #    print("Gold Token       : " + str(goldToken))
 #    print("Post-Gold        : " + str(postGold))
