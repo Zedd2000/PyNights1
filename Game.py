@@ -8,7 +8,6 @@ import foxRun
 from scares import foxy, bonnie, chica, fredCool
 
 #TODO add movement timers to make animatronics stay in place for at least 2 turns
-#TODO add gold trigger check on camera 2b
 
 minute = 1
 hour = 0
