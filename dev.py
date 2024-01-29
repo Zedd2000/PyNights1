@@ -176,6 +176,8 @@ while hour < 6:
             elif(cam == "2b"):
                 if(bonPos == 5): # Close left hall camera
                     campic.lHallCloseB()
+                elif(goldToken == True):
+                    campic.lHallCloseG()
                 else:
                     campic.lHallCloseX()
             elif(cam == "3"): # Supply closet camera
