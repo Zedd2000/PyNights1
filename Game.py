@@ -8,6 +8,7 @@ import foxRun
 from scares import foxy, bonnie, chica, fredCool
 
 #TODO add movement timers to make animatronics stay in place for at least 2 turns
+#TODO add gold trigger check on camera 2b
 
 minute = 1
 hour = 0
@@ -175,6 +176,8 @@ while hour < 6:
             elif(cam == "2b"):
                 if(bonPos == 5): # Close left hall camera
                     campic.lHallCloseB()
+                elif(goldToken == True):
+                    campic.lHallCloseG()
                 else:
                     campic.lHallCloseX()
             elif(cam == "3"): # Supply closet camera
@@ -290,7 +293,7 @@ while hour < 6:
                 if(bonPos > 2):# Bonnie can reset if past the Dining Hall
                     bonPos = 0
                     bonStag = 1
-#            print("Bonnie Reset")
+            print("Bonnie Reset")
         elif(25 < bonThreat < 51):
 #            print("Bonnie stays still")
             bonStag += 1
@@ -322,7 +325,7 @@ while hour < 6:
                 if(bonPos > 2):# Bonnie can reset if past the Dining Hall
                     bonPos = 0
                     bonStag = 1
-#                   print("Bonnie Reset")
+#                    print("Bonnie Reset")
         elif(bonThreat < 67):
             bonStag += 1
 #            print("Bonnie stays still")
@@ -369,8 +372,8 @@ while hour < 6:
             chiStag = 0
 #            print("Chica exits dead-end")
         else:
-#            print("Chica stays still")
-            chiStag += 1
+            print("Chica stays still")
+#            chiStag += 1
     elif(chiOp == 0):# Chica can now reset, stay, or progress
         if(chiThreat < 34):
             if(chiPos != 0):
