@@ -98,9 +98,9 @@ while hour < 6:
         print("Time : " + str(hour) + ":" + str(minute%60))
     print("Power : " + str(power))
     while(not action in ["c","ll","ld","rl","rd","n","m","ftest","btest","ctest","die","tcheck","gtest","win"]): #error correcting list of possible actions
-        print("#####################################################################################################################################################")
-        print("# c : Check cameras | ll : Toggle left light | ld : Toggle left door | rl : Toggle right light | rd : Toggle Right Door | n : Do nothing, pass time #")
-        print("#####################################################################################################################################################")
+        print("###################################################################################################################################################")
+        print("# c : Check cameras | ll : Check left light | ld : Toggle left door | rl : Check right light | rd : Toggle Right Door | n : Do nothing, pass time #")
+        print("###################################################################################################################################################")
         action = input("What would you like to do? : ") #User decides what action to do for thier turn.
         core.clear()
         if(goldToken == True):
