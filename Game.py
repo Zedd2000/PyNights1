@@ -233,12 +233,16 @@ while hour < 6:
         if(chiPos == 7):
             campic.rLightC()
             print("Chica is at the door.")
+        else:
+            print("You spot nothing in the window")
         power -= 1
 
     elif(action == "ll"): # Left light check
         if(bonPos == 7):
             campic.lLightB()
             print("Bonnie is at the door.")
+        else:
+            print("You spot nothing in the window")
         power -= 1
 
     elif(action == "n"): # Do nothing, pass time.
@@ -318,7 +322,7 @@ while hour < 6:
                 if(bonPos > 2):# Bonnie can reset if past the Dining Hall
                     bonPos = 0
                     bonStag = 1
-#                    print("Bonnie Reset")
+#                   print("Bonnie Reset")
         elif(bonThreat < 67):
             bonStag += 1
 #            print("Bonnie stays still")
