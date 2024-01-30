@@ -5,7 +5,7 @@ from os import system, name
 import core
 import campic
 import foxRun
-from scares import foxy, bonnie, chica, fredCool
+from scares import foxy, bonnie, chica, freddy, fredCool
 
 minute = 1
 hour = 0
@@ -92,12 +92,12 @@ while hour < 6:
     if(minute%60 == 0):
         hour += 1
         count = 0
-    if(count < 10):
-        print("Time : " + str(hour) + ":0" + str(minute%60))
-    else:
-        print("Time : " + str(hour) + ":" + str(minute%60))
-    print("Power : " + str(power))
-    while(not action in ["c","ll","ld","rl","rd","n","m","ftest","btest","ctest","die","tcheck","gtest","win"]): #error correcting list of possible actions
+    while(not action in ["c","ll","ld","rl","rd","n"]): #error correcting list of possible actions
+        if(count < 10):
+            print("Time : " + str(hour) + ":0" + str(minute%60))
+        else:
+            print("Time : " + str(hour) + ":" + str(minute%60))
+        print("Power : " + str(power))
         print("###################################################################################################################################################")
         print("# c : Check cameras | ll : Check left light | ld : Toggle left door | rl : Check right light | rd : Toggle Right Door | n : Do nothing, pass time #")
         print("###################################################################################################################################################")
@@ -486,7 +486,7 @@ if (hour == 6):
 ⣿⣿⣿⣿⣿⣿⣟⢢⠐⠠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠠⠀⢀⢻⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⡿⢎⠣⢌⠠⠁⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣴⣶⡶⠿⠟⠻⢦⣦⠐⠀⠌⣿⣿⣿⣿⡗
 ⣿⣿⣿⣿⣿⡷⣉⠗⡨⣰⣆⣤⣠⣄⣤⣀⣄⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⣤⠞⣟⣻⣭⠤⠴⣤⣔⣈⠤⠉⠆⡁⠈⣽⣿⣿⠋⠀
-⣿⣿⣿⣿⣿⣗⠮⣽⣿⣿⡿⢿⢿⣿⣿⣿⣿⣿⡿⣶⣆⠀⠀⠀⠀⠀⠩⠀⣾⡯⢿⡿⣿⡗⣶⣮⡝⡂⢁⠂⠄⠐⣸⣿⡇⠈⠀
+#⣿⣿⣿⣿⣿⣗⠮⣽⣿⣿⡿⢿⢿⣿⣿⣿⣿⣿⡿⣶⣆⠀⠀⠀⠀⠀⠩⠀⣾⡯⢿⡿⣿⡗⣶⣮⡝⡂⢁⠂⠄⠐⣸⣿⡇⠈⠀
 ⣸⣿⣿⣿⣿⣯⢺⣿⣿⡹⣾⣿⣿⠻⣿⣟⡿⠙⣽⠊⢏⠆⠀⠀⠀⠀⠁⠀⠘⠀⠀⠉⠉⡀⠆⠉⠁⠀⠀⠀⢀⠂⣸⡿⢃⠀⠀
 ⢿⣿⣿⣻⣿⣷⡉⢯⠘⡙⠙⠿⣋⠓⡀⢀⠀⠄⠀⠀⠀⠎⠀⠀⠀⠀⠀⠀⠀⠀⠁⠈⠀⠀⠀⠀⠀⠀⠀⠀⢀⠠⢸⢃⠀⢀⠀
 ⣼⢣⣿⣽⣿⣷⡍⠦⡁⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠌⡐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠂⣹⠃⠀⢀⠀
@@ -505,5 +505,7 @@ if (hour == 6):
 ⠀⠀⠀⠀⠀⣐⣾⣿⡿⡙⣿⣿⢿⣫⠿⣿⣿⣿⣿⣿⣿⣷⣿⣼⣾⣵⣯⣾⣵⣿⣿⣿⣿⣿⠟⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
                      YOU WIN""") # Player wins, game ends
 
-else:
+elif(rareRoll(19) == 19):
     fredCool()
+else:
+    freddy()
