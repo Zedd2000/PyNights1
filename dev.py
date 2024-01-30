@@ -5,7 +5,7 @@ from os import system, name
 import core
 import campic
 import foxRun
-from scares import foxy, bonnie, chica, fredCool
+from scares import foxy, bonnie, chica, freddy, fredCool
 
 minute = 1
 hour = 0
@@ -505,5 +505,7 @@ if (hour == 6):
 ⠀⠀⠀⠀⠀⣐⣾⣿⡿⡙⣿⣿⢿⣫⠿⣿⣿⣿⣿⣿⣿⣷⣿⣼⣾⣵⣯⣾⣵⣿⣿⣿⣿⣿⠟⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
                      YOU WIN""") # Player wins, game ends
 
-else:
+elif(rareRoll(19) == 19):
     fredCool()
+else:
+    freddy()
